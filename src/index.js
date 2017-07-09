@@ -1,5 +1,10 @@
-import React from "react";
-import { render } from "react-dom";
-import "reset-css/reset.css";
+import React from 'react';
+import { render } from 'react-dom';
+import 'reset-css/reset.css';
+import * as firebase from 'firebase';
+import firebaseConfig from './firebaseConfig'; 
+import AuthenticationWidget from './authentication/AuthenticationWidget';
 
-render(<h1>Toxic Avenger</h1>, document.getElementById("root"));
+firebase.initializeApp(firebaseConfig);
+
+render(<AuthenticationWidget />, document.getElementById('root'));
