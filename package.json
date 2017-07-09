@@ -4,6 +4,8 @@
   "description": "Toxic Avenger is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).",
   "main": "src/index.js",
   "scripts": {
+    "start": "webpack-dev-server --progress -d --colors --content-base ./public",
+    "build": "webpack --config webpack.production.config.js"
   },
   "repository": {
     "type": "git",
@@ -14,5 +16,21 @@
   "bugs": {
     "url": "https://github.com/bartw/toxicavenger/issues"
   },
-  "homepage": "https://github.com/bartw/toxicavenger#readme"
+  "homepage": "https://github.com/bartw/toxicavenger#readme",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.1.0",
+    "webpack-dev-server": "^2.5.1"
+  },
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "reset-css": "^2.2.0"
+  }
 }
