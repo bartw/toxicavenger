@@ -1,9 +1,9 @@
 {
   "rules": {
     "teams": {
-      "$user_id": {
-        ".read": "auth != null",
-        ".write": "$user_id === auth.uid"
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "$uid === auth.uid"
       }
     }
   }

@@ -14,6 +14,7 @@ export default class AuthenticationService {
     };
 
     this.getCurrentUser = () => auth.currentUser;
+    this.isAuthenticated = () => !!auth.currentUser;
 
     auth.onAuthStateChanged(onAuthStateChanged);
   }
