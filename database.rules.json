@@ -5,6 +5,26 @@
       "$uid": {
         ".write": "$uid === auth.uid"
       }
+    },
+    "teammembers": {
+      "$teamid": {
+        ".read": "root.child('teams').child(auth.uid).child($teamid) === true",
+        ".write": "root.child('teams').child(auth.uid).child($teamid) === true"
+      }
+    },
+    "sprints": {
+      "$teamid": {
+        ".read": "root.child('teammembers').child($teamid).child(auth.uid) === true",
+        ".write": "root.child('teams').child(auth.uid).child($teamid) === true"
+      }
+    },
+    "wasteitems": {
+      "$teamid": {
+        "$sprintid": {
+          ".read": "root.child('teammembers').child($teamid).child(auth.uid) === true",
+          ".write": "root.child('teammembers').child($teamid).child(auth.uid) === true"
+        }
+      }
     }
   }
 }

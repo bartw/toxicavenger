@@ -17,7 +17,7 @@ export default class App extends React.Component {
       user: this.authenticationService.getCurrentUser(),
       teams: []
     };
-    this.onSetSelectedTeam = () => {};
+    this.onSetSelectedTeam = id => { this.setState({ selectedTeam: id }); };
     this.onDeleteTeam = id => {
       this.teamService.delete(this.state.user.uid, id);
     };
@@ -37,7 +37,7 @@ export default class App extends React.Component {
           login={this.authenticationService.login}
           logout={this.authenticationService.logout}
         />
-        {isAuthenticated &&
+        {isAuthenticated && !this.state.selectedTeam &&
           <Teams
             uid={this.state.user.uid}
             teams={this.state.teams}
@@ -45,6 +45,7 @@ export default class App extends React.Component {
             onDelete={this.onDeleteTeam}
             onAdd={this.onAddTeam}
           />}
+        {isAuthenticated && this.state.selectedTeam && <h3>Sprints</h3>}
       </div>
     );
   }

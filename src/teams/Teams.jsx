@@ -8,7 +8,9 @@ export default function Teams({ uid, teams, onSetSelected, onDelete, onAdd }) {
       key={team.id}
       isOwner={team.uid === uid}
       name={team.name}
-      setSelected={onSetSelected}
+      onSetSelected={() => {
+        onSetSelected(team.id);
+      }}
       onDelete={() => {
         onDelete(team.id);
       }}
