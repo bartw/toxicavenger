@@ -3,8 +3,8 @@ import { render } from 'react-dom';
 import 'reset-css/reset.css';
 import * as firebase from 'firebase';
 import firebaseConfig from './firebaseConfig'; 
-import AuthenticationWidget from './authentication/AuthenticationWidget';
+import App from './app/App';
 
 firebase.initializeApp(firebaseConfig);
 
-render(<AuthenticationWidget />, document.getElementById('root'));
+render(<App />, document.getElementById('root'));
