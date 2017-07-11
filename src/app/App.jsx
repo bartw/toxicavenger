@@ -3,6 +3,10 @@ import AuthenticationService from "../services/AuthenticationService";
 import TeamService from "../services/TeamService";
 import Authentication from "../authentication/Authentication";
 import Teams from "../teams/Teams";
+import Requests from "../requests/Requests";
+import Sprints from "../sprints/Sprints";
+import WasteItems from "../wasteItems/WasteItems";
+import GoBackWrapper from "../navigation/GoBackWrapper";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -31,6 +35,14 @@ export default class App extends React.Component {
     this.setState({ showTeamRequests: id });
   };
 
+    onShowTeamMembers = id => {
+    this.setState({ showTeamMembers: id });
+  };
+
+  onSetSelectedSprint = id => {
+    this.setState({ selectedSprint: id });
+  };
+
   onDeleteTeam = id => {
     this.teamService.delete(this.state.user.uid, id);
   };
@@ -42,6 +54,11 @@ export default class App extends React.Component {
   render() {
     const name = (this.state.user && this.state.user.displayName) || "guest";
     const isAuthenticated = !!this.state.user;
+    const showTeams = isAuthenticated && !this.state.selectedTeam && !this.state.showTeamRequests && !this.state.showTeamMembers && !this.state.selectedSprint;
+    const showRequests = isAuthenticated && !this.state.selectedTeam && this.state.showTeamRequests && !this.state.showTeamMembers && !this.state.selectedSprint;
+    const showMembers = isAuthenticated && !this.state.selectedTeam && !this.state.showTeamRequests && this.state.showTeamMembers && !this.state.selectedSprint;
+    const showSprints = isAuthenticated && this.state.selectedTeam && !this.state.showTeamRequests && !this.state.showTeamMembers && !this.state.selectedSprint;
+    const showWasteItems = isAuthenticated && this.state.selectedTeam && !this.state.showTeamRequests && !this.state.showTeamMembers && this.state.selectedSprint;
     return (
       <div>
         <Authentication
@@ -50,9 +67,7 @@ export default class App extends React.Component {
           login={this.authenticationService.login}
           logout={this.authenticationService.logout}
         />
-        {isAuthenticated &&
-          !this.state.selectedTeam &&
-          !this.state.showTeamRequests &&
+        {showTeams &&
           <Teams
             uid={this.state.user.uid}
             teams={this.state.teams}
@@ -62,14 +77,22 @@ export default class App extends React.Component {
             onDelete={this.onDeleteTeam}
             onAdd={this.onAddTeam}
           />}
-        {isAuthenticated &&
-          this.state.showTeamRequests &&
-          !this.state.selectedTeam &&
-          <h3>Requests</h3>}
-        {isAuthenticated &&
-          !this.state.showTeamRequests &&
-          this.state.selectedTeam &&
-          <h3>Sprints</h3>}
+        {showRequests &&
+          <GoBackWrapper onGoBack={() => this.setState({ showTeamRequests: null })}>
+            <Requests/>
+          </GoBackWrapper>}
+        {showMembers &&
+          <GoBackWrapper onGoBack={() => this.setState({ showTeamMembers: null })}>
+            <Members/>
+          </GoBackWrapper>}
+        {showSprints &&
+          <GoBackWrapper onGoBack={() => this.setState({ selectedTeam: null })}>
+            <Sprints/>
+          </GoBackWrapper>}
+        {showWasteItems &&
+          <GoBackWrapper onGoBack={() => this.setState({ selectedSprint: null })}>
+            <WasteItems/>
+          </GoBackWrapper>}
       </div>
     );
   }
