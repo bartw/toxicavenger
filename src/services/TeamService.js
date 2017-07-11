@@ -16,15 +16,22 @@ function mapTeams(snapshot) {
 
 export default class TeamService {
   constructor(onChanged) {
-      firebase.database().ref("teams").on("value", snapshot => {
-        onChanged(mapTeams(snapshot));
-      });
+    firebase.database().ref("teams").on("value", snapshot => {
+      onChanged(mapTeams(snapshot));
+    });
 
     this.add = (uid, name) => {
       if (!uid || !name) {
         return;
       }
-      firebase.database().ref("teams/" + uid).push({ name: name });
+      firebase
+        .database()
+        .ref("teams/" + uid)
+        .push({ name: name, members: [uid] });
+    };
+
+    this.join = (uid, id) => {
+      firebase.database().ref("teamrequests/" + id + "/" + uid).set(true);
     };
 
     this.delete = (uid, id) => {

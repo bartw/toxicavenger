@@ -2,14 +2,21 @@ import React from "react";
 import TeamRow from "./TeamRow";
 import AddTeam from "./AddTeam";
 
-export default function Teams({ uid, teams, onSetSelected, onDelete, onAdd }) {
+export default function Teams({ uid, teams, onSetSelected, onJoin, onShowRequests, onDelete, onAdd }) {
   const teamRows = teams.map(team =>
     <TeamRow
       key={team.id}
       isOwner={team.uid === uid}
+      isMember={team.members.find(member => member === uid)}
       name={team.name}
       onSetSelected={() => {
         onSetSelected(team.id);
+      }}
+      onJoin={() => {
+        onJoin(team.id);
+      }}
+      onShowRequests={() => {
+        onShowRequests(team.id);
       }}
       onDelete={() => {
         onDelete(team.id);
