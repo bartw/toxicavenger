@@ -2,21 +2,19 @@ import * as firebase from "firebase";
 
 export default class AuthenticationService {
   constructor(onAuthStateChanged) {
-    const auth = firebase.auth();
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    this.login = () => {
-      auth.signInWithPopup(provider);
-    };
-
-    this.logout = () => {
-      auth.signOut();
-    };
-
-    this.getCurrentUser = () => auth.currentUser;
-    this.isAuthenticated = () => !!auth.currentUser;
-
+    this.auth = firebase.auth();
     onAuthStateChanged(this.getCurrentUser());
-    auth.onAuthStateChanged(onAuthStateChanged);
+    this.auth.onAuthStateChanged(onAuthStateChanged);
   }
+
+  login = () => {
+    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  };
+
+  logout = () => {
+    this.auth.signOut();
+  };
+
+  getCurrentUser = () => this.auth.currentUser;
+  isAuthenticated = () => !!this.auth.currentUser;
 }
