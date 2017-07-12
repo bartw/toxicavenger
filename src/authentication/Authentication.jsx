@@ -1,21 +1,30 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import AuthenticationComponent from "./AuthenticationComponent";
+import AuthenticationService from "../services/AuthenticationService";
 
-export default function Authentication({ isAuthenticated, name, login, logout }) {
-  return (
-    <div>
-      <h2>
-        Welcome {name}
-      </h2>
-      {!isAuthenticated && <button onClick={login}>login</button>}
-      {isAuthenticated && <button onClick={logout}>logout</button>}
-    </div>
-  );
+export default class Authentication extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentWillMount() {
+    this.authenticationService = new AuthenticationService(user => {
+      this.setState({ user: user });
+      this.props.onStateChanged(user ? user.uid : null);
+    });
+  }
+
+  render() {
+    const name = (this.state.user && this.state.user.displayName) || "guest";
+    const isAuthenticated = !!this.state.user;
+    return (
+      <AuthenticationComponent
+        isAuthenticated={isAuthenticated}
+        name={name}
+        login={this.authenticationService.login}
+        logout={this.authenticationService.logout}
+      />
+    );
+  }
 }
-
-Authentication.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
-  login: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired
-};
