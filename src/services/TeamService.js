@@ -16,7 +16,9 @@ function mapTeams(snapshot) {
 
 export default class TeamService {
   constructor(onChanged) {
-    firebase.database().ref("teams").on("value", snapshot => {
+    const ref = firebase.database().ref("teams");
+
+    ref.on("value", snapshot => {
       onChanged(mapTeams(snapshot));
     });
 
@@ -62,5 +64,9 @@ export default class TeamService {
     this.delete = (owner, id) => {
       firebase.database().ref("teams/" + owner + "/" + id).remove();
     };
+
+    this.dispose = () => {
+      ref.off();
+    }
   }
 }

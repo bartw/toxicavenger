@@ -1,30 +1,34 @@
 import React from "react";
 
-export default function TeamRow({ isOwner, isMember, name, onSetSelected, onJoin, onShowRequests, onDelete }) {
-  const handleJoin = e => {
-    e.stopPropagation();
-    onJoin();
+export default function TeamRow({ user, team, actions }) {
+  const isOwner = team.owner === user;
+  const isMember = team.members.find(member => member === user);
+  const onShowSprints = () => {
+    actions.onShowSprints(team.id);
   };
-
-  const handleShowRequests = e => {
-    e.stopPropagation();
-    onShowRequests();
+  const onJoin = () => {
+    actions.onJoin(team.id);
   };
-
-  const handleDelete = e => {
-    e.stopPropagation();
-    onDelete();
+  const onShowRequests = () => {
+    actions.onShowRequests(team.id);
   };
-
+  const onShowMembers = () => {
+    actions.onShowMembers(team.id);
+  };
+  const onDelete = () => {
+    actions.onDelete(team.id);
+  };
   return (
-    <tr onClick={onSetSelected}>
+    <tr>
       <td>
-        {name}
+        {team.name}
       </td>
       <td>
-        {!isOwner && !isMember && <a onClick={handleJoin}>join</a>}
-        {isOwner && <a onClick={handleShowRequests}>requests</a>}
-        {isOwner && <a onClick={handleDelete}>delete</a>}
+        {(isOwner || isMember) && <a onClick={onShowSprints}>sprints</a>}
+        {!isOwner && !isMember && <a onClick={onJoin}>join</a>}
+        {isOwner && <a onClick={onShowRequests}>requests</a>}
+        {isOwner && <a onClick={onShowMembers}>members</a>}
+        {isOwner && <a onClick={onDelete}>delete</a>}
       </td>
     </tr>
   );

@@ -6,7 +6,13 @@
         ".write": "$uid === auth.uid"
       }
     },
-    "teamrequests": {
+    "members": {
+      "$teamid": {
+        ".read": "root.child('teams').child(auth.uid).child($teamid).val() === true",
+        ".write": "root.child('teams').child(auth.uid).child($teamid).val() === true"
+      }
+    },
+    "requests": {
       "$teamid": {
         ".read": "root.child('teams').child(auth.uid).child($teamid).val() === true",
         ".write": "auth != null"

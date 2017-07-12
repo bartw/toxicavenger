@@ -1,45 +1,50 @@
 import React from "react";
-import TeamRow from "./TeamRow";
-import AddTeam from "./AddTeam";
+import TeamService from "../services/TeamService";
+import TeamsComponent from "./TeamsComponent";
 
-export default function Teams({ uid, teams, onSetSelected, onJoin, onShowRequests, onDelete, onAdd }) {
-  const teamRows = teams.map(team =>
-    <TeamRow
-      key={team.id}
-      isOwner={team.uid === uid}
-      isMember={team.members.find(member => member === uid)}
-      name={team.name}
-      onSetSelected={() => {
-        onSetSelected(team.id);
-      }}
-      onJoin={() => {
-        onJoin(team.id);
-      }}
-      onShowRequests={() => {
-        onShowRequests(team.id);
-      }}
-      onDelete={() => {
-        onDelete(team.id);
-      }}
-    />
-  );
-  return (
-    <div>
-      <h2>Teams</h2>
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {teamRows}
-          </tbody>
-        </table>
-      </div>
-      <AddTeam onAdd={onAdd} />
-    </div>
-  );
+export default class Teams extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { teams: [] };
+  }
+
+  componentWillMount() {
+    this.teamService = new TeamService(teams => {
+      this.setState({ teams: teams });
+    });
+  }
+
+  componentWillUnmount() {
+    this.teamService.dispose();
+  }
+
+  onJoin = id => {
+    this.teamService.join(this.props.user, id);
+  };
+
+  onDelete = id => {
+    this.teamService.delete(this.props.user, id);
+  };
+
+  onAdd = name => {
+    this.teamService.add(this.props.user, name);
+  };
+
+  render() {
+    const actions = {
+      onShowSprints: this.props.onShowSprints,
+      onShowRequests: this.props.onShowRequests,
+      onShowMembers: this.props.onShowMembers,
+      onJoin: this.onJoin,
+      onDelete: this.onDelete,
+      onAdd: this.onAdd
+    };
+    return (
+      <TeamsComponent
+        user={this.props.user}
+        teams={this.state.teams}
+        actions={actions}
+      />
+    );
+  }
 }

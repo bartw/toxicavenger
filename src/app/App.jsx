@@ -1,64 +1,50 @@
 import React from "react";
 import AuthenticationService from "../services/AuthenticationService";
-import TeamService from "../services/TeamService";
 import Authentication from "../authentication/Authentication";
 import Teams from "../teams/Teams";
 import Requests from "../requests/Requests";
+import Members from "../members/Members";
 import Sprints from "../sprints/Sprints";
-import WasteItems from "../wasteItems/WasteItems";
+import Waste from "../waste/Waste";
 import GoBackWrapper from "../navigation/GoBackWrapper";
+
+const TEAMS = "TEAMS";
+const REQUESTS = "REQUESTS";
+const MEMBERS = "MEMBERS";
+const SPRINTS = "SPRINTS";
+const WASTE = "WASTE";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.authenticationService = new AuthenticationService(user => {
       this.setState({ user: user });
-      this.teamService = new TeamService(teams => {
-        this.setState({ teams: teams });
-      });
     });
     this.state = {
       user: this.authenticationService.getCurrentUser(),
-      teams: []
+      activePage: TEAMS
     };
   }
 
-  onSetSelectedTeam = id => {
-    this.setState({ selectedTeam: id });
+  onShowSprints = id => {
+    this.setState({ activePage: SPRINTS, teamId: id });
   };
 
-  onJoinTeam = id => {
-    this.teamService.join(this.state.user.uid, id);
+  onShowRequests = id => {
+    this.setState({ activePage: REQUESTS, teamId: id });
   };
 
-  onShowTeamRequests = id => {
-    this.setState({ showTeamRequests: id });
+  onShowMembers = id => {
+    this.setState({ activePage: MEMBERS, teamId: id });
   };
 
-    onShowTeamMembers = id => {
-    this.setState({ showTeamMembers: id });
-  };
-
-  onSetSelectedSprint = id => {
-    this.setState({ selectedSprint: id });
-  };
-
-  onDeleteTeam = id => {
-    this.teamService.delete(this.state.user.uid, id);
-  };
-
-  onAddTeam = name => {
-    this.teamService.add(this.state.user.uid, name);
+  onShowWaste = id => {
+    this.setState({ activePage: WASTE, sprintId: id });
   };
 
   render() {
     const name = (this.state.user && this.state.user.displayName) || "guest";
     const isAuthenticated = !!this.state.user;
-    const showTeams = isAuthenticated && !this.state.selectedTeam && !this.state.showTeamRequests && !this.state.showTeamMembers && !this.state.selectedSprint;
-    const showRequests = isAuthenticated && !this.state.selectedTeam && this.state.showTeamRequests && !this.state.showTeamMembers && !this.state.selectedSprint;
-    const showMembers = isAuthenticated && !this.state.selectedTeam && !this.state.showTeamRequests && this.state.showTeamMembers && !this.state.selectedSprint;
-    const showSprints = isAuthenticated && this.state.selectedTeam && !this.state.showTeamRequests && !this.state.showTeamMembers && !this.state.selectedSprint;
-    const showWasteItems = isAuthenticated && this.state.selectedTeam && !this.state.showTeamRequests && !this.state.showTeamMembers && this.state.selectedSprint;
     return (
       <div>
         <Authentication
@@ -67,32 +53,44 @@ export default class App extends React.Component {
           login={this.authenticationService.login}
           logout={this.authenticationService.logout}
         />
-        {showTeams &&
-          <Teams
-            uid={this.state.user.uid}
-            teams={this.state.teams}
-            onSetSelected={this.onSetSelectedTeam}
-            onJoin={this.onJoinTeam}
-            onShowRequests={this.onShowTeamRequests}
-            onDelete={this.onDeleteTeam}
-            onAdd={this.onAddTeam}
-          />}
-        {showRequests &&
-          <GoBackWrapper onGoBack={() => this.setState({ showTeamRequests: null })}>
-            <Requests/>
-          </GoBackWrapper>}
-        {showMembers &&
-          <GoBackWrapper onGoBack={() => this.setState({ showTeamMembers: null })}>
-            <Members/>
-          </GoBackWrapper>}
-        {showSprints &&
-          <GoBackWrapper onGoBack={() => this.setState({ selectedTeam: null })}>
-            <Sprints/>
-          </GoBackWrapper>}
-        {showWasteItems &&
-          <GoBackWrapper onGoBack={() => this.setState({ selectedSprint: null })}>
-            <WasteItems/>
-          </GoBackWrapper>}
+        {isAuthenticated &&
+          <div>
+            {this.state.activePage === TEAMS &&
+              <Teams
+                user={this.state.user.uid}
+                onShowSprints={this.onShowSprints}
+                onShowRequests={this.onShowRequests}
+                onShowMembers={this.onShowMembers}
+              />}
+            {this.state.activePage === REQUESTS &&
+              <GoBackWrapper
+                onGoBack={() =>
+                  this.setState({ activePage: TEAMS, teamId: null })}
+              >
+                <Requests />
+              </GoBackWrapper>}
+            {this.state.activePage === MEMBERS &&
+              <GoBackWrapper
+                onGoBack={() =>
+                  this.setState({ activePage: TEAMS, teamId: null })}
+              >
+                <Members />
+              </GoBackWrapper>}
+            {this.state.activePage === SPRINTS &&
+              <GoBackWrapper
+                onGoBack={() =>
+                  this.setState({ activePage: TEAMS, teamId: null })}
+              >
+                <Sprints onShowWaste={this.onShowWaste} />
+              </GoBackWrapper>}
+            {this.state.activePage === WASTE &&
+              <GoBackWrapper
+                onGoBack={() =>
+                  this.setState({ activePage: SPRINTS, sprintId: null })}
+              >
+                <Waste />
+              </GoBackWrapper>}
+          </div>}
       </div>
     );
   }
