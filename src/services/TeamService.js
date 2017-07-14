@@ -33,7 +33,7 @@ export default class TeamService {
     };
 
     this.join = (member, id) => {
-      firebase.database().ref("teamrequests/" + id + "/" + member).set(true);
+      firebase.database().ref("requests/" + id + "/" + member).set(true);
     };
 
     this.approve = (owner, member, id) => {
@@ -43,12 +43,12 @@ export default class TeamService {
         firebase.database().ref("teams/" + owner + "/" + id).set({
           members: [...members, member]
         });
-        firebase.database().ref("teamrequests/" + id + "/" + member).remove();
+        firebase.database().ref("requests/" + id + "/" + member).remove();
       });
     };
 
     this.decline = (member, id) => {
-      firebase.database().ref("teamrequests/" + id + "/" + member).remove();
+      firebase.database().ref("requests/" + id + "/" + member).remove();
     };
 
     this.removeMember = (owner, member, id) => {
