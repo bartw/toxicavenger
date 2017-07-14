@@ -18,16 +18,16 @@ export default class Teams extends React.Component {
     this.teamService.dispose();
   }
 
-  onJoin = id => {
-    this.teamService.join(this.props.user, id);
+  onJoin = join => {
+    join(this.props.user.uid, this.props.user.displayName);
   };
 
   onDelete = id => {
-    this.teamService.delete(this.props.user, id);
+    this.teamService.delete(this.props.user.uid, id);
   };
 
   onAdd = name => {
-    this.teamService.add(this.props.user, name);
+    this.teamService.add(this.props.user.uid, name);
   };
 
   render() {
@@ -41,7 +41,7 @@ export default class Teams extends React.Component {
     };
     return (
       <TeamsComponent
-        user={this.props.user}
+        user={this.props.user.uid}
         teams={this.state.teams}
         actions={actions}
       />

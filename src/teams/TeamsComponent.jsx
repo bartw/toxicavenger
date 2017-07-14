@@ -1,11 +1,11 @@
 import React from "react";
-import TeamRow from "./TeamRow";
+import Team from "./Team";
 import AddTeam from "./AddTeam";
 
 export default function TeamsComponent({ user, teams, actions }) {
   const { onAdd, ...rowActions } = actions;
   const teamRows = teams.map(team =>
-    <TeamRow
+    <Team
       key={team.id}
       user={user}
       team={team}

@@ -1,72 +1,32 @@
 import * as firebase from "firebase";
 import _ from "lodash";
 
-function mapTeams(snapshot) {
-  return _(snapshot.val())
-    .mapValues((teams, owner) =>
-      _(teams)
-        .mapValues((team, id) => _.merge({}, team, { id }, { owner }))
-        .values()
-        .value()
-    )
-    .values()
-    .flatten()
-    .value();
-}
-
 export default class TeamService {
   constructor(onChanged) {
     const ref = firebase.database().ref("teams");
-
+    
     ref.on("value", snapshot => {
-      onChanged(mapTeams(snapshot));
+      const data = snapshot.val();
+      const owners = _(data).keys().value();
+      const teams = _(owners).map(owner => {
+        const ownerTeams = _(data[owner]).keys().value();
+        return _(ownerTeams).map(ownerTeam => {
+          return {...data[owner][ownerTeam], owner: owner, id: ownerTeam};
+        }).value();
+      }).flatten().value();
+      onChanged(teams);
     });
 
     this.add = (owner, name) => {
-      if (!owner || !name) {
-        return;
-      }
-      firebase
-        .database()
-        .ref("teams/" + owner)
-        .push({ name: name, members: [owner] });
-    };
-
-    this.join = (member, id) => {
-      firebase.database().ref("requests/" + id + "/" + member).set(true);
-    };
-
-    this.approve = (owner, member, id) => {
-      const ref = firebase.database().ref("teams/" + owner + "/" + id);
-      ref.once("value").then(snapshot => {
-        const members = snapshot.val().members;
-        firebase.database().ref("teams/" + owner + "/" + id).set({
-          members: [...members, member]
-        });
-        firebase.database().ref("requests/" + id + "/" + member).remove();
-      });
-    };
-
-    this.decline = (member, id) => {
-      firebase.database().ref("requests/" + id + "/" + member).remove();
-    };
-
-    this.removeMember = (owner, member, id) => {
-      const ref = firebase.database().ref("teams/" + owner + "/" + id);
-      ref.once("value").then(snapshot => {
-        const members = snapshot.val().members;
-        firebase.database().ref("teams/" + owner + "/" + id).set({
-          members: members.filter(existingMember => existingMember !== member)
-        });
-      });
+      ref.child(owner).push({ name });
     };
 
     this.delete = (owner, id) => {
-      firebase.database().ref("teams/" + owner + "/" + id).remove();
+      ref.child(owner).child(id).remove();
     };
 
     this.dispose = () => {
       ref.off();
-    }
+    };
   }
 }

@@ -50,7 +50,7 @@ export default class Content extends React.Component {
           <GoBackWrapper
             onGoBack={() => this.setState({ activePage: TEAMS, teamId: null })}
           >
-            <Requests />
+            <Requests team={this.state.teamId} />
           </GoBackWrapper>}
         {this.state.activePage === MEMBERS &&
           <GoBackWrapper
