@@ -16,14 +16,14 @@ export default class Team extends React.Component {
   }
 
   onApprove = () => {
-    this.memberService.add(this.props.request.member, this.props.request.name);
+    this.memberService.add(this.props.request.userId, this.props.request.userName);
     this.props.onDelete();
   };
 
   render() {
     return (
       <RequestComponent
-        name={this.props.request.name}
+        name={this.props.request.userName}
         onDelete={this.props.onDelete}
         onApprove={this.onApprove}
       />

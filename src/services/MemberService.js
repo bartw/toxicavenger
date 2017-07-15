@@ -1,4 +1,5 @@
 import * as firebase from "firebase";
+import Member from "../entities/Member";
 
 export default class MemberService {
   constructor(team, onChanged) {
@@ -7,10 +8,7 @@ export default class MemberService {
 
     if (onChanged) {
       ref.on("child_added", data => {
-        const newMember = {
-          uid: data.key,
-          name: data.val().name
-        };
+        const newMember = new Member(data.key, data.val().name);
         members = [newMember, ...members];
         onChanged(members);
       });

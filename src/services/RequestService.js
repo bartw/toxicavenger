@@ -1,4 +1,5 @@
 import * as firebase from "firebase";
+import Request from "../entities/Request";
 
 export default class RequestService {
   constructor(team, onChanged) {
@@ -7,11 +8,11 @@ export default class RequestService {
 
     if (onChanged) {
       ref.on("child_added", data => {
-        const newRequest = {
-          id: data.key,
-          member: data.val().member,
-          name: data.val().name
-        };
+        const newRequest = new Request(
+          data.key,
+          data.val().userId,
+          data.val().userName
+        );
         requests = [newRequest, ...requests];
         onChanged(requests);
       });
@@ -22,8 +23,8 @@ export default class RequestService {
       });
     }
 
-    this.add = (member, name) => {
-      ref.push({ member: member, name });
+    this.add = (userId, userName) => {
+      ref.push({ userId: userId, userName });
     };
 
     this.delete = id => {

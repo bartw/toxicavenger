@@ -1,4 +1,5 @@
 import * as firebase from "firebase";
+import WasteItem from "../entities/WasteItem";
 
 export default class WasteService {
   constructor(team, sprint, onChanged) {
@@ -7,14 +8,14 @@ export default class WasteService {
 
     if (onChanged) {
       ref.on("child_added", data => {
-        const newWaste = {
-          id: data.key,
-          userUid: data.val().userUid,
-          userName: data.val().userName,
-          type: data.val().type,
-          description: data.val().description,
-          duration: parseFloat(data.val().duration)
-        };
+        const newWaste = new WasteItem(
+          data.key,
+          data.val().userId,
+          data.val().userName,
+          data.val().type,
+          data.val().description,
+          data.val().duration
+        );
         waste = [newWaste, ...waste];
         onChanged(waste);
       });
@@ -25,8 +26,14 @@ export default class WasteService {
       });
     }
 
-    this.add = (userUid, userName, type, description, duration) => {
-      ref.push({userUid, userName, type, description, duration: parseFloat(duration).toFixed(1) });
+    this.add = (userId, userName, type, description, duration) => {
+      ref.push({
+        userId,
+        userName,
+        type,
+        description,
+        duration: parseFloat(duration).toFixed(1)
+      });
     };
 
     this.delete = id => {

@@ -8,7 +8,7 @@ export default class WasteChart extends React.Component {
     super(props);
 
     this.chartProperties = [
-      { key: "userUid", value: "userName", label: "user name" },
+      { key: "userId", value: "userName", label: "user name" },
       { key: "type", value: "type", label: "type" }
     ];
 
@@ -90,7 +90,9 @@ export default class WasteChart extends React.Component {
 
     return (
       <div>
-        <h3>Visualization of {this.props.sprint.name} of {this.props.team.name}</h3>
+        <h3>
+          Visualization of {this.props.sprint.name} of {this.props.team.name}
+        </h3>
         <div>
           <fieldset>
             {chartPropertyRadioButtons}

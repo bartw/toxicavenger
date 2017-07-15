@@ -1,4 +1,5 @@
 import * as firebase from "firebase";
+import Sprint from "../entities/Sprint";
 
 export default class SprintService {
   constructor(team, onChanged) {
@@ -7,10 +8,7 @@ export default class SprintService {
 
     if (onChanged) {
       ref.on("child_added", data => {
-        const newSprint = {
-          id: data.key,
-          name: data.val().name
-        };
+        const newSprint = new Sprint(data.key, data.val().name);
         sprints = [newSprint, ...sprints];
         onChanged(sprints);
       });
@@ -21,7 +19,7 @@ export default class SprintService {
       });
     }
 
-    this.add = (name) => {
+    this.add = name => {
       ref.push({ name });
     };
 
