@@ -25,7 +25,7 @@ export default function SprintsComponent({
   );
   return (
     <div>
-      <h2>Sprints</h2>
+      <h3>Sprints</h3>
       <div>
         <table>
           <thead>

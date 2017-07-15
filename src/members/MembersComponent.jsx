@@ -13,7 +13,7 @@ export default function MembersComponent({ members, onDelete }) {
   );
   return (
     <div>
-      <h2>Members</h2>
+      <h3>Members</h3>
       <div>
         <table>
           <thead>

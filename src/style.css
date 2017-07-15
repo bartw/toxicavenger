@@ -20,6 +20,12 @@ h2 {
     margin: 10px 0;
 }
 
+h3 {
+    font-size: 1.25em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
 a {
     text-decoration: underline;
     margin-right: 5px;
@@ -41,4 +47,13 @@ th {
 th, td {
     padding: 5px;
     border: 1px solid black;
+}
+
+footer {
+    margin: 10px 0;
+    font-size: 0.75em;
+}
+
+footer a {
+    color: black;
 }

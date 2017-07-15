@@ -14,7 +14,7 @@ export default function TeamsComponent({ user, teams, actions }) {
   );
   return (
     <div>
-      <h2>Teams</h2>
+      <h3>Teams</h3>
       <div>
         <table>
           <thead>

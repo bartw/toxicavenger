@@ -15,7 +15,7 @@ export default function WasteComponent({ waste, onDelete, onAdd }) {
   );
   return (
     <div>
-      <h2>Waste</h2>
+      <h3>Waste</h3>
       <div>
         <table>
           <thead>

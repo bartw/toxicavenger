@@ -14,7 +14,7 @@ export default function RequestsComponent({ team, requests, onDelete }) {
   );
   return (
     <div>
-      <h2>Requests</h2>
+      <h3>Requests</h3>
       <div>
         <table>
           <thead>
