@@ -9,6 +9,7 @@ export default class WasteService {
       ref.on("child_added", data => {
         const newWaste = {
           id: data.key,
+          type: data.val().type,
           description: data.val().description,
           duration: data.val().duration
         };
@@ -22,8 +23,8 @@ export default class WasteService {
       });
     }
 
-    this.add = (description, duration) => {
-      ref.push({ description, duration });
+    this.add = (type, description, duration) => {
+      ref.push({ type, description, duration });
     };
 
     this.delete = id => {

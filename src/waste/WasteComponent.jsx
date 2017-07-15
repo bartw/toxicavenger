@@ -3,13 +3,12 @@ import WasteItem from "./WasteItem";
 import AddWaste from "./AddWaste";
 
 export default function WasteComponent({ waste, onDelete, onAdd }) {
-  const wasteRows = waste.map(waste =>
+  const wasteRows = waste.map(item =>
     <WasteItem
-      key={waste.id}
-      description={waste.description}
-      duration={waste.duration}
+      key={item.id}
+      waste={item}
       onDelete={() => {
-        onDelete(waste.id);
+        onDelete(item.id);
       }}
     />
   );
@@ -20,6 +19,7 @@ export default function WasteComponent({ waste, onDelete, onAdd }) {
         <table>
           <thead>
             <tr>
+              <th>Type</th>
               <th>Description</th>
               <th>Duration</th>
               <th>Actions</th>

@@ -4,11 +4,16 @@ export default class AddSprint extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { description: "", duration: "" };
+    this.types = ["work", "meeting"];
+    this.state = { type: this.types[0], description: "", duration: "" };
   }
 
   onChangeDescription = e => {
     this.setState({ description: e.target.value });
+  };
+
+  onChangeType = e => {
+    this.setState({ type: e.target.value });
   };
 
   onChangeDuration = e => {
@@ -16,13 +21,25 @@ export default class AddSprint extends React.Component {
   };
 
   onAdd = () => {
-    this.props.onAdd(this.state.description, this.state.duration);
-    this.setState({ description: "", duration: "" });
+    this.props.onAdd(
+      this.state.type,
+      this.state.description,
+      this.state.duration
+    );
+    this.setState({ type: this.types[0], description: "", duration: "" });
   };
 
   render() {
+    const typeOptions = this.types.map(type =>
+      <option key={type} value={type}>
+        {type}
+      </option>
+    );
     return (
       <div>
+        <select value={this.state.type} onChange={this.onChangeType}>
+          {typeOptions}
+        </select>
         <input
           type="text"
           value={this.state.description}
@@ -37,7 +54,10 @@ export default class AddSprint extends React.Component {
           onChange={this.onChangeDuration}
           placeholder="duration"
         />
-        <button onClick={this.onAdd} disabled={!this.state.description || !this.state.duration}>
+        <button
+          onClick={this.onAdd}
+          disabled={!this.state.description || !this.state.duration}
+        >
           Add
         </button>
       </div>

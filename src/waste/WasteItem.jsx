@@ -1,13 +1,16 @@
 import React from "react";
 
-export default function Sprint({ description, duration, onDelete }) {
+export default function WasteItem({ waste, onDelete }) {
   return (
     <tr>
       <td>
-        {description}
+        {waste.type}
       </td>
       <td>
-        {duration}
+        {waste.description}
+      </td>
+      <td>
+        {waste.duration}
       </td>
       <td>
         <a onClick={onDelete}>delete</a>
