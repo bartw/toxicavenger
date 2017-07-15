@@ -26,15 +26,15 @@ export default class Team extends React.Component {
   };
 
   onShowSprints = () => {
-    this.props.actions.onShowSprints(this.props.team.id);
+    this.props.actions.onShowSprints(this.props.team);
   };
 
   onShowRequests = () => {
-    this.props.actions.onShowRequests(this.props.team.id);
+    this.props.actions.onShowRequests(this.props.team);
   };
 
   onShowMembers = () => {
-    this.props.actions.onShowMembers(this.props.team.id);
+    this.props.actions.onShowMembers(this.props.team);
   };
 
   onDelete = () => {

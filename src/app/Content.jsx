@@ -20,16 +20,16 @@ export default class Content extends React.Component {
     };
   }
 
-  onShowSprints = id => {
-    this.setState({ activePage: SPRINTS, teamId: id });
+  onShowSprints = team => {
+    this.setState({ activePage: SPRINTS, team: team });
   };
 
-  onShowRequests = id => {
-    this.setState({ activePage: REQUESTS, teamId: id });
+  onShowRequests = team => {
+    this.setState({ activePage: REQUESTS, team: team });
   };
 
-  onShowMembers = id => {
-    this.setState({ activePage: MEMBERS, teamId: id });
+  onShowMembers = team => {
+    this.setState({ activePage: MEMBERS, team: team });
   };
 
   onShowWaste = id => {
@@ -48,28 +48,32 @@ export default class Content extends React.Component {
           />}
         {this.state.activePage === REQUESTS &&
           <GoBackWrapper
-            onGoBack={() => this.setState({ activePage: TEAMS, teamId: null })}
+            onGoBack={() => this.setState({ activePage: TEAMS, team: null })}
           >
-            <Requests team={this.state.teamId} />
+            <Requests team={this.state.team.id} />
           </GoBackWrapper>}
         {this.state.activePage === MEMBERS &&
           <GoBackWrapper
-            onGoBack={() => this.setState({ activePage: TEAMS, teamId: null })}
+            onGoBack={() => this.setState({ activePage: TEAMS, team: null })}
           >
-            <Members team={this.state.teamId} />
+            <Members team={this.state.team.id} />
           </GoBackWrapper>}
         {this.state.activePage === SPRINTS &&
           <GoBackWrapper
-            onGoBack={() => this.setState({ activePage: TEAMS, teamId: null })}
+            onGoBack={() => this.setState({ activePage: TEAMS, team: null })}
           >
-            <Sprints onShowWaste={this.onShowWaste} />
+            <Sprints
+              user={this.props.user.uid}
+              team={this.state.team}
+              onShowWaste={this.onShowWaste}
+            />
           </GoBackWrapper>}
         {this.state.activePage === WASTE &&
           <GoBackWrapper
             onGoBack={() =>
               this.setState({ activePage: SPRINTS, sprintId: null })}
           >
-            <Waste />
+            <Waste team={this.state.team.id} sprint={this.state.sprintId} />
           </GoBackWrapper>}
       </div>
     );
