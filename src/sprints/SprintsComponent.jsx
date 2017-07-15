@@ -7,6 +7,7 @@ export default function SprintsComponent({
   isOwner,
   sprints,
   onShowWaste,
+  onShowVisualization,
   onDelete,
   onAdd
 }) {
@@ -20,6 +21,9 @@ export default function SprintsComponent({
       }}
       onShowWaste={() => {
         onShowWaste(sprint.id);
+      }}
+      onShowVisualization={() => {
+        onShowVisualization(sprint.id);
       }}
     />
   );

@@ -4,6 +4,7 @@ import Requests from "../requests/Requests";
 import Members from "../members/Members";
 import Sprints from "../sprints/Sprints";
 import Waste from "../waste/Waste";
+import WasteChart from "../visualization/WasteChart";
 import GoBackWrapper from "../navigation/GoBackWrapper";
 
 const TEAMS = "TEAMS";
@@ -11,6 +12,7 @@ const REQUESTS = "REQUESTS";
 const MEMBERS = "MEMBERS";
 const SPRINTS = "SPRINTS";
 const WASTE = "WASTE";
+const VISUALIZATION = "VISUALIZATION";
 
 export default class Content extends React.Component {
   constructor(props) {
@@ -34,6 +36,10 @@ export default class Content extends React.Component {
 
   onShowWaste = id => {
     this.setState({ activePage: WASTE, sprintId: id });
+  };
+
+  onShowVisualization = id => {
+    this.setState({ activePage: VISUALIZATION, sprintId: id });
   };
 
   render() {
@@ -66,6 +72,7 @@ export default class Content extends React.Component {
               user={this.props.user.uid}
               team={this.state.team}
               onShowWaste={this.onShowWaste}
+              onShowVisualization={this.onShowVisualization}
             />
           </GoBackWrapper>}
         {this.state.activePage === WASTE &&
@@ -74,6 +81,13 @@ export default class Content extends React.Component {
               this.setState({ activePage: SPRINTS, sprintId: null })}
           >
             <Waste team={this.state.team.id} sprint={this.state.sprintId} user={this.props.user} />
+          </GoBackWrapper>}
+        {this.state.activePage === VISUALIZATION &&
+          <GoBackWrapper
+            onGoBack={() =>
+              this.setState({ activePage: SPRINTS, sprintId: null })}
+          >
+            <WasteChart team={this.state.team.id} sprint={this.state.sprintId} user={this.props.user.uid} />
           </GoBackWrapper>}
       </div>
     );

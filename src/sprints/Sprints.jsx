@@ -36,6 +36,7 @@ export default class Sprints extends React.Component {
         onAdd={this.onAdd}
         onDelete={this.onDelete}
         onShowWaste={this.props.onShowWaste}
+        onShowVisualization={this.props.onShowVisualization}
       />
     );
   }
