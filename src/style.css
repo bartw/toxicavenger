@@ -29,6 +29,11 @@ h3 {
 a {
   text-decoration: underline;
   margin-right: 5px;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 .goback {
