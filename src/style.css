@@ -77,8 +77,17 @@ select {
   font-weight: bold;
 }
 
-.rightText {
+.right-text {
   text-align: right;
+}
+
+.welcome {
+  padding: 50px 0 100px 0;
+  text-align: center;
+}
+
+.welcome h2 {
+  margin-bottom: 50px;
 }
 
 header {

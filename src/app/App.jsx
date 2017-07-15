@@ -24,9 +24,15 @@ export default class App extends React.Component {
             <h1>Toxic Avenger</h1>
           </div>
         </header>
-          <div className="container">
-            {this.state.user && <Content user={this.state.user} />}
-          </div>
+        <div className="container">
+          {!this.state.user &&
+            <div className="welcome">
+              <h2>Toxic Avenger</h2>
+              <h3>Welcome</h3>
+              <p>Log in to start tracking your waste.</p>
+            </div>}
+          {this.state.user && <Content user={this.state.user} />}
+        </div>
         <footer>
           <div className="container">
             <p className="left">

@@ -33,7 +33,7 @@ export default function WasteComponent({ waste, onDelete, onAdd }) {
               <td />
               <td />
               <td />
-              <td className="bold rightText">
+              <td className="bold right-text">
                 {total}
               </td>
               <td />

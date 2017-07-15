@@ -12,7 +12,7 @@ export default function WasteItem({ waste, onDelete }) {
       <td>
         {waste.description}
       </td>
-      <td className="rightText">
+      <td className="right-text">
         {waste.duration.toFixed(1)}
       </td>
       <td>
