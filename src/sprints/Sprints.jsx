@@ -30,7 +30,7 @@ export default class Sprints extends React.Component {
     const isOwner = this.props.team.owner === this.props.user;
     return (
       <SprintsComponent
-        team={this.props.team.id}
+        team={this.props.team.name}
         isOwner={isOwner}
         sprints={this.state.sprints}
         onAdd={this.onAdd}

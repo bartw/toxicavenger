@@ -9,7 +9,7 @@ export default class Members extends React.Component {
   }
 
   componentWillMount() {
-    this.memberService = new MemberService(this.props.team, members => {
+    this.memberService = new MemberService(this.props.team.id, members => {
       this.setState({ members: members });
     });
   }
@@ -25,6 +25,7 @@ export default class Members extends React.Component {
   render() {
     return (
       <MembersComponent
+        team={this.props.team.name}
         members={this.state.members}
         onDelete={this.onDelete}
       />

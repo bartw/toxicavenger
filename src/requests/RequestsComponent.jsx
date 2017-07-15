@@ -5,7 +5,7 @@ export default function RequestsComponent({ team, requests, onDelete }) {
   const requestRows = requests.map(request =>
     <Request
       key={request.id}
-      team={team}
+      team={team.id}
       request={request}
       onDelete={() => {
         onDelete(request.id);
@@ -14,7 +14,7 @@ export default function RequestsComponent({ team, requests, onDelete }) {
   );
   return (
     <div>
-      <h3>Requests</h3>
+      <h3>Requests of {team.name}</h3>
       <div>
         <table>
           <thead>

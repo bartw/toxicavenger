@@ -9,7 +9,7 @@ export default class Requests extends React.Component {
   }
 
   componentWillMount() {
-    this.requestService = new RequestService(this.props.team, requests => {
+    this.requestService = new RequestService(this.props.team.id, requests => {
       this.setState({ requests: requests });
     });
   }

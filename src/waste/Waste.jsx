@@ -10,8 +10,8 @@ export default class Waste extends React.Component {
 
   componentWillMount() {
     this.wasteService = new WasteService(
-      this.props.team,
-      this.props.sprint,
+      this.props.team.id,
+      this.props.sprint.id,
       waste => {
         this.setState({ waste: waste });
       }
@@ -33,6 +33,8 @@ export default class Waste extends React.Component {
   render() {
     return (
       <WasteComponent
+        team={this.props.team.name}
+        sprint={this.props.sprint.name}
         waste={this.state.waste}
         onAdd={this.onAdd}
         onDelete={this.onDelete}

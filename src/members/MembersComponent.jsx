@@ -1,7 +1,7 @@
 import React from "react";
 import Member from "./Member";
 
-export default function MembersComponent({ members, onDelete }) {
+export default function MembersComponent({ team, members, onDelete }) {
   const memberRows = members.map(member =>
     <Member
       key={member.uid}
@@ -13,7 +13,7 @@ export default function MembersComponent({ members, onDelete }) {
   );
   return (
     <div>
-      <h3>Members</h3>
+      <h3>Members of {team}</h3>
       <div>
         <table>
           <thead>

@@ -17,8 +17,8 @@ export default class WasteChart extends React.Component {
 
   componentWillMount() {
     this.wasteService = new WasteService(
-      this.props.team,
-      this.props.sprint,
+      this.props.team.id,
+      this.props.sprint.id,
       waste => {
         this.setState({ waste: waste });
       }
@@ -90,7 +90,7 @@ export default class WasteChart extends React.Component {
 
     return (
       <div>
-        <h3>Visualization</h3>
+        <h3>Visualization of {this.props.sprint.name} of {this.props.team.name}</h3>
         <div>
           <fieldset>
             {chartPropertyRadioButtons}

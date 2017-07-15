@@ -20,16 +20,16 @@ export default function SprintsComponent({
         onDelete(sprint.id);
       }}
       onShowWaste={() => {
-        onShowWaste(sprint.id);
+        onShowWaste(sprint);
       }}
       onShowVisualization={() => {
-        onShowVisualization(sprint.id);
+        onShowVisualization(sprint);
       }}
     />
   );
   return (
     <div>
-      <h3>Sprints</h3>
+      <h3>Sprints of {team}</h3>
       <div>
         <table>
           <thead>

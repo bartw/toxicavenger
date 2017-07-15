@@ -34,12 +34,12 @@ export default class Content extends React.Component {
     this.setState({ activePage: MEMBERS, team: team });
   };
 
-  onShowWaste = id => {
-    this.setState({ activePage: WASTE, sprintId: id });
+  onShowWaste = sprint => {
+    this.setState({ activePage: WASTE, sprint: sprint });
   };
 
-  onShowVisualization = id => {
-    this.setState({ activePage: VISUALIZATION, sprintId: id });
+  onShowVisualization = sprint => {
+    this.setState({ activePage: VISUALIZATION, sprint: sprint });
   };
 
   render() {
@@ -56,13 +56,13 @@ export default class Content extends React.Component {
           <GoBackWrapper
             onGoBack={() => this.setState({ activePage: TEAMS, team: null })}
           >
-            <Requests team={this.state.team.id} />
+            <Requests team={this.state.team} />
           </GoBackWrapper>}
         {this.state.activePage === MEMBERS &&
           <GoBackWrapper
             onGoBack={() => this.setState({ activePage: TEAMS, team: null })}
           >
-            <Members team={this.state.team.id} />
+            <Members team={this.state.team} />
           </GoBackWrapper>}
         {this.state.activePage === SPRINTS &&
           <GoBackWrapper
@@ -78,16 +78,16 @@ export default class Content extends React.Component {
         {this.state.activePage === WASTE &&
           <GoBackWrapper
             onGoBack={() =>
-              this.setState({ activePage: SPRINTS, sprintId: null })}
+              this.setState({ activePage: SPRINTS, sprint: null })}
           >
-            <Waste team={this.state.team.id} sprint={this.state.sprintId} user={this.props.user} />
+            <Waste team={this.state.team} sprint={this.state.sprint} user={this.props.user} />
           </GoBackWrapper>}
         {this.state.activePage === VISUALIZATION &&
           <GoBackWrapper
             onGoBack={() =>
-              this.setState({ activePage: SPRINTS, sprintId: null })}
+              this.setState({ activePage: SPRINTS, sprint: null })}
           >
-            <WasteChart team={this.state.team.id} sprint={this.state.sprintId} user={this.props.user.uid} />
+            <WasteChart team={this.state.team} sprint={this.state.sprint} user={this.props.user.uid} />
           </GoBackWrapper>}
       </div>
     );

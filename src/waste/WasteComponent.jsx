@@ -2,7 +2,7 @@ import React from "react";
 import WasteItem from "./WasteItem";
 import AddWaste from "./AddWaste";
 
-export default function WasteComponent({ waste, onDelete, onAdd }) {
+export default function WasteComponent({ team, sprint, waste, onDelete, onAdd }) {
   const wasteRows = waste.map(item =>
     <WasteItem
       key={item.id}
@@ -15,7 +15,7 @@ export default function WasteComponent({ waste, onDelete, onAdd }) {
   const total = waste.length ? waste.reduce((sum, item) => sum + item.duration, 0).toFixed(1) : 0;
   return (
     <div>
-      <h3>Waste</h3>
+      <h3>Waste of {sprint} of {team}</h3>
       <div>
         <table>
           <thead>
