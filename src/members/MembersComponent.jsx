@@ -18,8 +18,8 @@ export default function MembersComponent({ members, onDelete }) {
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Actions</th>
+              <th>name</th>
+              <th>actions</th>
             </tr>
           </thead>
           <tbody>

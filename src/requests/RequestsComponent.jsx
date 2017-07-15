@@ -19,8 +19,8 @@ export default function RequestsComponent({ team, requests, onDelete }) {
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Actions</th>
+              <th>name</th>
+              <th>actions</th>
             </tr>
           </thead>
           <tbody>

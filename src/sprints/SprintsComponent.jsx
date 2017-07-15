@@ -34,8 +34,8 @@ export default function SprintsComponent({
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Actions</th>
+              <th>name</th>
+              <th>actions</th>
             </tr>
           </thead>
           <tbody>
