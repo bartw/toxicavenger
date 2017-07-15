@@ -14,7 +14,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="container">
         <Authentication user={this.state.user} onStateChanged={this.onAuthenticationStateChanged} />
         {this.state.user && <Content user={this.state.user} />}
       </div>

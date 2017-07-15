@@ -20,7 +20,7 @@ export default function RequestsComponent({ team, requests, onDelete }) {
           <thead>
             <tr>
               <th>Name</th>
-              <th />
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

@@ -31,7 +31,7 @@ export default function SprintsComponent({
           <thead>
             <tr>
               <th>Name</th>
-              <th />
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

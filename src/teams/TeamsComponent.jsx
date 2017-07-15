@@ -20,7 +20,7 @@ export default function TeamsComponent({ user, teams, actions }) {
           <thead>
             <tr>
               <th>Name</th>
-              <th />
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

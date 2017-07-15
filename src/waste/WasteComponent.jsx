@@ -22,7 +22,7 @@ export default function WasteComponent({ waste, onDelete, onAdd }) {
             <tr>
               <th>Description</th>
               <th>Duration</th>
-              <th />
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
