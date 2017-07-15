@@ -9,8 +9,8 @@ export default function WasteItem({ waste, onDelete }) {
       <td>
         {waste.description}
       </td>
-      <td>
-        {waste.duration}
+      <td className="right">
+        {waste.duration.toFixed(1)}
       </td>
       <td>
         <a onClick={onDelete}>delete</a>

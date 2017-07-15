@@ -11,7 +11,7 @@ export default class WasteService {
           id: data.key,
           type: data.val().type,
           description: data.val().description,
-          duration: data.val().duration
+          duration: parseFloat(data.val().duration)
         };
         waste = [newWaste, ...waste];
         onChanged(waste);
@@ -24,7 +24,7 @@ export default class WasteService {
     }
 
     this.add = (type, description, duration) => {
-      ref.push({ type, description, duration });
+      ref.push({ type, description, duration: parseFloat(duration).toFixed(1) });
     };
 
     this.delete = id => {

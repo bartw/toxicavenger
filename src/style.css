@@ -9,51 +9,69 @@ html {
 }
 
 h1 {
-    font-size: 2em;
-    font-weight: bold;
-    margin: 10px 0;
+  font-size: 2em;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 h2 {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin: 10px 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 h3 {
-    font-size: 1.25em;
-    font-weight: bold;
-    margin: 10px 0;
+  font-size: 1.25em;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 a {
-    text-decoration: underline;
-    margin-right: 5px;
+  text-decoration: underline;
+  margin-right: 5px;
 }
 
 .goback {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 table {
-    margin: 10px 0;
-    width: 100%;
+  margin: 10px 0;
+  width: 100%;
 }
 
 th {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-th, td {
-    padding: 5px;
-    border: 1px solid black;
+th,
+td {
+  padding: 5px;
+  border: 1px solid black;
 }
 
 footer {
-    margin: 10px 0;
-    font-size: 0.75em;
+  margin: 10px 0;
+  font-size: 0.75em;
 }
 
 footer a {
-    color: black;
+  color: black;
+}
+
+input,
+select {
+  margin-right: 5px;
+}
+
+select {
+  padding: 1px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.right {
+    text-align: right;
 }

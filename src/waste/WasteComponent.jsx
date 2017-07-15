@@ -12,6 +12,7 @@ export default function WasteComponent({ waste, onDelete, onAdd }) {
       }}
     />
   );
+  const total = waste.length ? waste.reduce((sum, item) => sum + item.duration, 0).toFixed(1) : 0;
   return (
     <div>
       <h3>Waste</h3>
@@ -27,6 +28,14 @@ export default function WasteComponent({ waste, onDelete, onAdd }) {
           </thead>
           <tbody>
             {wasteRows}
+            <tr>
+              <td />
+              <td />
+              <td className="bold right">
+                {total}
+              </td>
+              <td />
+            </tr>
           </tbody>
         </table>
       </div>
