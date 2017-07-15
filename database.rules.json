@@ -8,7 +8,7 @@
     },
     "members": {
       "$teamid": {
-        ".read": "root.child('teams').child(auth.uid).child($teamid).exists()",
+        ".read": "auth != null",
         ".write": "root.child('teams').child(auth.uid).child($teamid).exists()"
       }
     },
@@ -20,15 +20,15 @@
     },
     "sprints": {
       "$teamid": {
-        ".read": "root.child('teams').child($teamid).child('members').child(auth.uid).exists()",
+        ".read": "root.child('teams').child(auth.uid).child($teamid).exists() || root.child('members').child($teamid).child(auth.uid).exists()",
         ".write": "root.child('teams').child(auth.uid).child($teamid).exists()"
       }
     },
-    "wasteitems": {
+    "waste": {
       "$teamid": {
         "$sprintid": {
-          ".read": "root.child('teams').child($teamid).child('members').child(auth.uid).exists()",
-          ".write": "root.child('teams').child($teamid).child('members').child(auth.uid).exists()"
+          ".read": "root.child('teams').child(auth.uid).child($teamid).exists() || root.child('members').child($teamid).child(auth.uid).exists()",
+          ".write": "root.child('teams').child(auth.uid).child($teamid).exists() || root.child('members').child($teamid).child(auth.uid).exists()"
         }
       }
     }

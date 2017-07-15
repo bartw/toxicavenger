@@ -1,18 +1,24 @@
 import React from "react";
 import RequestService from "../services/RequestService";
+import MemberService from "../services/MemberService";
 import TeamComponent from "./TeamComponent";
 
 export default class Team extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { members: [] };
   }
 
   componentWillMount() {
     this.requestService = new RequestService(this.props.team.id);
+    this.memberService = new MemberService(this.props.team.id, members => {
+      this.setState({ members: members });
+    });
   }
 
   componentWillUnmount() {
     this.requestService.dispose();
+    this.memberService.dispose();
   }
 
   onJoin = () => {
@@ -37,7 +43,7 @@ export default class Team extends React.Component {
 
   render() {
     const isOwner = this.props.team.owner === this.props.user;
-    const isMember = false;//this.props.team.members.find(member => member === this.props.user);
+    const isMember = this.state.members.find(member => member.uid === this.props.user);
     const actions = {
       onShowSprints: this.onShowSprints,
       onShowRequests: this.onShowRequests,
@@ -46,7 +52,12 @@ export default class Team extends React.Component {
       onDelete: this.onDelete
     };
     return (
-      <TeamComponent name={this.props.team.name} isOwner={isOwner} isMember={isMember} actions={actions} />
+      <TeamComponent
+        name={this.props.team.name}
+        isOwner={isOwner}
+        isMember={isMember}
+        actions={actions}
+      />
     );
   }
 }

@@ -1,11 +1,12 @@
 import React from "react";
 import Request from "./Request";
 
-export default function RequestsComponent({ requests, onDelete }) {
+export default function RequestsComponent({ team, requests, onDelete }) {
   const requestRows = requests.map(request =>
     <Request
       key={request.id}
-      name={request.name}
+      team={team}
+      request={request}
       onDelete={() => {
         onDelete(request.id);
       }}

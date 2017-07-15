@@ -25,6 +25,7 @@ export default class Requests extends React.Component {
   render() {
     return (
       <RequestsComponent
+        team={this.props.team}
         requests={this.state.requests}
         onDelete={this.onDelete}
       />
