@@ -1,5 +1,42 @@
 import React from "react";
+import WasteService from "../services/WasteService";
+import WasteComponent from "./WasteComponent";
 
-export default function Waste() {
-  return <h3>Waste</h3>;
+export default class Waste extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { waste: [] };
+  }
+
+  componentWillMount() {
+    this.wasteService = new WasteService(
+      this.props.team,
+      this.props.sprint,
+      waste => {
+        this.setState({ waste: waste });
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    this.wasteService.dispose();
+  }
+
+  onAdd = (description, duration) => {
+    this.wasteService.add(description, duration);
+  };
+
+  onDelete = id => {
+    this.wasteService.delete(id);
+  };
+
+  render() {
+    return (
+      <WasteComponent
+        waste={this.state.waste}
+        onAdd={this.onAdd}
+        onDelete={this.onDelete}
+      />
+    );
+  }
 }

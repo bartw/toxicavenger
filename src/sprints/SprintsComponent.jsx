@@ -2,7 +2,14 @@ import React from "react";
 import Sprint from "./Sprint";
 import AddSprint from "./AddSprint";
 
-export default function SprintsComponent({ team, isOwner, sprints, onShowWaste, onDelete, onAdd }) {
+export default function SprintsComponent({
+  team,
+  isOwner,
+  sprints,
+  onShowWaste,
+  onDelete,
+  onAdd
+}) {
   const sprintRows = sprints.map(sprint =>
     <Sprint
       key={sprint.id}
@@ -11,7 +18,9 @@ export default function SprintsComponent({ team, isOwner, sprints, onShowWaste, 
       onDelete={() => {
         onDelete(sprint.id);
       }}
-      onShowWaste={onShowWaste}
+      onShowWaste={() => {
+        onShowWaste(sprint.id);
+      }}
     />
   );
   return (
