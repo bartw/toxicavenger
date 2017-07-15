@@ -5,20 +5,22 @@ export default class RequestService {
     const ref = firebase.database().ref("requests/" + team);
     let requests = [];
 
-    ref.on("child_added", data => {
-      const newRequest = {
-        id: data.key,
-        member: data.val().member,
-        name: data.val().name
-      };
-      requests = [newRequest, ...requests];
-      onChanged(requests);
-    });
+    if (onChanged) {
+      ref.on("child_added", data => {
+        const newRequest = {
+          id: data.key,
+          member: data.val().member,
+          name: data.val().name
+        };
+        requests = [newRequest, ...requests];
+        onChanged(requests);
+      });
 
-    ref.on("child_removed", data => {
-      requests = requests.filter(request => request.id !== data.key);
-      onChanged(requests);
-    });
+      ref.on("child_removed", data => {
+        requests = requests.filter(request => request.id !== data.key);
+        onChanged(requests);
+      });
+    }
 
     this.add = (member, name) => {
       ref.push({ member: member, name });
@@ -29,7 +31,9 @@ export default class RequestService {
     };
 
     this.dispose = () => {
-      ref.off();
+      if (onChanged) {
+        ref.off();
+      }
     };
   }
 }

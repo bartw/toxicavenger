@@ -19,11 +19,7 @@ export default class Requests extends React.Component {
   }
 
   onDelete = id => {
-    this.requestService.delete(this.props.user, id);
-  };
-
-  onAdd = name => {
-    this.requestService.add(this.props.user, name);
+    this.requestService.delete(id);
   };
 
   render() {
@@ -31,7 +27,6 @@ export default class Requests extends React.Component {
       <RequestsComponent
         requests={this.state.requests}
         onDelete={this.onDelete}
-        onAdd={this.onAdd}
       />
     );
   }

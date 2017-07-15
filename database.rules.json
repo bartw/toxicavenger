@@ -8,27 +8,27 @@
     },
     "members": {
       "$teamid": {
-        ".read": "root.child('teams').child(auth.uid).child($teamid).val() === true",
-        ".write": "root.child('teams').child(auth.uid).child($teamid).val() === true"
+        ".read": "root.child('teams').child(auth.uid).child($teamid).exists()",
+        ".write": "root.child('teams').child(auth.uid).child($teamid).exists()"
       }
     },
     "requests": {
       "$teamid": {
-        ".read": "root.child('teams').child(auth.uid).child($teamid).val() === true",
+        ".read": "root.child('teams').child(auth.uid).child($teamid).exists()",
         ".write": "auth != null"
       }
     },
     "sprints": {
       "$teamid": {
-        ".read": "root.child('teams').child($teamid).child('members').child(auth.uid).val() === true",
-        ".write": "root.child('teams').child(auth.uid).child($teamid).val() === true"
+        ".read": "root.child('teams').child($teamid).child('members').child(auth.uid).exists()",
+        ".write": "root.child('teams').child(auth.uid).child($teamid).exists()"
       }
     },
     "wasteitems": {
       "$teamid": {
         "$sprintid": {
-          ".read": "root.child('teams').child($teamid).child('members').child(auth.uid).val() === true",
-          ".write": "root.child('teams').child($teamid).child('members').child(auth.uid).val() === true"
+          ".read": "root.child('teams').child($teamid).child('members').child(auth.uid).exists()",
+          ".write": "root.child('teams').child($teamid).child('members').child(auth.uid).exists()"
         }
       }
     }

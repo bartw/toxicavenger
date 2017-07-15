@@ -8,7 +8,7 @@ export default class Team extends React.Component {
   }
 
   componentWillMount() {
-    this.requestService = new RequestService(this.props.team.id, () => {});
+    this.requestService = new RequestService(this.props.team.id);
   }
 
   componentWillUnmount() {

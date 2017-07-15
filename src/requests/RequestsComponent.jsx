@@ -1,35 +1,32 @@
 import React from "react";
-// import Team from "./Team";
-// import AddTeam from "./AddTeam";
+import Request from "./Request";
 
-export default function RequestsComponent({ requests, onDelete, onAdd }) {
-  return <h1>Requests</h1>;
-  //   const { onAdd, ...rowActions } = actions;
-  //   const teamRows = teams.map(team =>
-  //     <Team
-  //       key={team.id}
-  //       user={user}
-  //       team={team}
-  //       actions={rowActions}
-  //     />
-  //   );
-  //   return (
-  //     <div>
-  //       <h2>Teams</h2>
-  //       <div>
-  //         <table>
-  //           <thead>
-  //             <tr>
-  //               <th>Name</th>
-  //               <th />
-  //             </tr>
-  //           </thead>
-  //           <tbody>
-  //             {teamRows}
-  //           </tbody>
-  //         </table>
-  //       </div>
-  //       <AddTeam onAdd={onAdd} />
-  //     </div>
-  //   );
+export default function RequestsComponent({ requests, onDelete }) {
+  const requestRows = requests.map(request =>
+    <Request
+      key={request.id}
+      name={request.name}
+      onDelete={() => {
+        onDelete(request.id);
+      }}
+    />
+  );
+  return (
+    <div>
+      <h2>Requests</h2>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            {requestRows}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
