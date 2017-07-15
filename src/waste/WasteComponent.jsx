@@ -20,6 +20,7 @@ export default function WasteComponent({ waste, onDelete, onAdd }) {
         <table>
           <thead>
             <tr>
+              <th>Name</th>
               <th>Type</th>
               <th>Description</th>
               <th>Duration</th>
@@ -29,6 +30,7 @@ export default function WasteComponent({ waste, onDelete, onAdd }) {
           <tbody>
             {wasteRows}
             <tr>
+              <td />
               <td />
               <td />
               <td className="bold right">

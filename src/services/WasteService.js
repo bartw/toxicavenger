@@ -9,6 +9,8 @@ export default class WasteService {
       ref.on("child_added", data => {
         const newWaste = {
           id: data.key,
+          userUid: data.val().userUid,
+          userName: data.val().userName,
           type: data.val().type,
           description: data.val().description,
           duration: parseFloat(data.val().duration)
@@ -23,8 +25,8 @@ export default class WasteService {
       });
     }
 
-    this.add = (type, description, duration) => {
-      ref.push({ type, description, duration: parseFloat(duration).toFixed(1) });
+    this.add = (userUid, userName, type, description, duration) => {
+      ref.push({userUid, userName, type, description, duration: parseFloat(duration).toFixed(1) });
     };
 
     this.delete = id => {

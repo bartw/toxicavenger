@@ -4,6 +4,9 @@ export default function WasteItem({ waste, onDelete }) {
   return (
     <tr>
       <td>
+        {waste.userName}
+      </td>
+      <td>
         {waste.type}
       </td>
       <td>

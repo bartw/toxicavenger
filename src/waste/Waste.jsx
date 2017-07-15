@@ -23,7 +23,7 @@ export default class Waste extends React.Component {
   }
 
   onAdd = (type, description, duration) => {
-    this.wasteService.add(type, description, duration);
+    this.wasteService.add(this.props.user.uid, this.props.user.displayName, type, description, duration);
   };
 
   onDelete = id => {

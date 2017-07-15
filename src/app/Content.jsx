@@ -73,7 +73,7 @@ export default class Content extends React.Component {
             onGoBack={() =>
               this.setState({ activePage: SPRINTS, sprintId: null })}
           >
-            <Waste team={this.state.team.id} sprint={this.state.sprintId} />
+            <Waste team={this.state.team.id} sprint={this.state.sprintId} user={this.props.user} />
           </GoBackWrapper>}
       </div>
     );
