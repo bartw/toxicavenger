@@ -1,5 +1,4 @@
 import * as firebase from "firebase";
-import _ from "lodash";
 import Team from "../entities/Team";
 
 export default class TeamService {
@@ -8,13 +7,7 @@ export default class TeamService {
     
     ref.on("value", snapshot => {
       const data = snapshot.val();
-      const owners = _(data).keys().value();
-      const teams = _(owners).map(owner => {
-        const ownerTeams = _(data[owner]).keys().value();
-        return _(ownerTeams).map(ownerTeam => {
-          return new Team(ownerTeam, owner, data[owner][ownerTeam].name);
-        }).value();
-      }).flatten().value();
+      const teams = Team.parseTeams(data);
       onChanged(teams);
     });
 
