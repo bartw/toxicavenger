@@ -7,14 +7,9 @@ export default class MemberService {
     let members = [];
 
     if (onChanged) {
-      ref.on("child_added", data => {
-        const newMember = new Member(data.key, data.val().name);
-        members = [newMember, ...members];
-        onChanged(members);
-      });
-
-      ref.on("child_removed", data => {
-        members = members.filter(member => member.uid !== data.key);
+      ref.on("value", snapshot => {
+        const data = snapshot.val();
+        const members = Member.parseMembers(data);
         onChanged(members);
       });
     }

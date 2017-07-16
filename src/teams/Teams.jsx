@@ -1,6 +1,8 @@
 import React from "react";
 import TeamService from "../services/TeamService";
-import TeamsComponent from "./TeamsComponent";
+import TablePage from "../app/TablePage";
+import Team from "./Team";
+import AddTeam from "./AddTeam";
 
 export default class Teams extends React.Component {
   constructor(props) {
@@ -36,15 +38,20 @@ export default class Teams extends React.Component {
       onShowRequests: this.props.onShowRequests,
       onShowMembers: this.props.onShowMembers,
       onJoin: this.onJoin,
-      onDelete: this.onDelete,
-      onAdd: this.onAdd
+      onDelete: this.onDelete
     };
-    return (
-      <TeamsComponent
+    const teamRows = this.state.teams.map(team =>
+      <Team
+        key={team.id}
         user={this.props.user.uid}
-        teams={this.state.teams}
+        team={team}
         actions={actions}
       />
+    );
+    return (
+      <TablePage title="Teams" headers={["name", "actions"]} rows={teamRows}>
+        <AddTeam onAdd={this.onAdd} />
+      </TablePage>
     );
   }
 }

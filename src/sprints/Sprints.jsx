@@ -1,6 +1,8 @@
 import React from "react";
 import SprintService from "../services/SprintService";
-import SprintsComponent from "./SprintsComponent";
+import TablePage from "../app/TablePage";
+import Sprint from "./Sprint";
+import AddSprint from "./AddSprint";
 
 export default class Sprints extends React.Component {
   constructor(props) {
@@ -28,16 +30,30 @@ export default class Sprints extends React.Component {
 
   render() {
     const isOwner = this.props.team.isOwner(this.props.user);
-    return (
-      <SprintsComponent
-        team={this.props.team.name}
+    const sprintRows = this.state.sprints.map(sprint =>
+      <Sprint
+        key={sprint.id}
         isOwner={isOwner}
-        sprints={this.state.sprints}
-        onAdd={this.onAdd}
-        onDelete={this.onDelete}
-        onShowWaste={this.props.onShowWaste}
-        onShowVisualization={this.props.onShowVisualization}
+        name={sprint.name}
+        onDelete={() => {
+          this.onDelete(sprint.id);
+        }}
+        onShowWaste={() => {
+          this.props.onShowWaste(sprint);
+        }}
+        onShowVisualization={() => {
+          this.props.onShowVisualization(sprint);
+        }}
       />
+    );
+    return (
+      <TablePage
+        title={`Sprints of ${this.props.team.name}`}
+        headers={["name", "actions"]}
+        rows={sprintRows}
+      >
+        {isOwner && <AddSprint onAdd={this.onAdd} />}
+      </TablePage>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import RequestService from "../services/RequestService";
-import RequestsComponent from "./RequestsComponent";
+import TablePage from "../app/TablePage";
+import Request from "./Request";
 
 export default class Requests extends React.Component {
   constructor(props) {
@@ -23,11 +24,21 @@ export default class Requests extends React.Component {
   };
 
   render() {
+    const requestRows = this.state.requests.map(request =>
+      <Request
+        key={request.id}
+        team={this.props.team.id}
+        request={request}
+        onDelete={() => {
+          this.onDelete(request.id);
+        }}
+      />
+    );
     return (
-      <RequestsComponent
-        team={this.props.team}
-        requests={this.state.requests}
-        onDelete={this.onDelete}
+      <TablePage
+        title={`Requests of ${this.props.team.name}`}
+        headers={["name", "actions"]}
+        rows={requestRows}
       />
     );
   }

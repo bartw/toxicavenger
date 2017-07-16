@@ -1,6 +1,7 @@
 import React from "react";
 import MemberService from "../services/MemberService";
-import MembersComponent from "./MembersComponent";
+import TablePage from "../app/TablePage";
+import Member from "./Member";
 
 export default class Members extends React.Component {
   constructor(props) {
@@ -23,11 +24,20 @@ export default class Members extends React.Component {
   };
 
   render() {
+    const memberRows = this.state.members.map(member =>
+      <Member
+        key={member.uid}
+        name={member.name}
+        onDelete={() => {
+          this.onDelete(member.uid);
+        }}
+      />
+    );
     return (
-      <MembersComponent
-        team={this.props.team.name}
-        members={this.state.members}
-        onDelete={this.onDelete}
+      <TablePage
+        title={`Members of ${this.props.team.name}`}
+        headers={["name", "actions"]}
+        rows={memberRows}
       />
     );
   }
