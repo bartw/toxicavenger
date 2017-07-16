@@ -42,7 +42,7 @@ export default class Team extends React.Component {
   };
 
   render() {
-    const isOwner = this.props.team.owner === this.props.user;
+    const isOwner = this.props.team.isOwner(this.props.user);
     const isMember = this.state.members.find(member => member.uid === this.props.user);
     const actions = {
       onShowSprints: this.onShowSprints,

@@ -1,5 +1,6 @@
 import * as firebase from "firebase";
 import _ from "lodash";
+import Team from "../entities/Team";
 
 export default class TeamService {
   constructor(onChanged) {
@@ -11,7 +12,7 @@ export default class TeamService {
       const teams = _(owners).map(owner => {
         const ownerTeams = _(data[owner]).keys().value();
         return _(ownerTeams).map(ownerTeam => {
-          return {...data[owner][ownerTeam], owner: owner, id: ownerTeam};
+          return new Team(ownerTeam, owner, data[owner][ownerTeam].name);
         }).value();
       }).flatten().value();
       onChanged(teams);
