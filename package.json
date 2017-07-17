@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --progress -d --colors --content-base ./public",
     "build": "webpack -p --config webpack.production.config.js",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch --coverage --collectCoverageFrom=src/**/*.{js,jsx}"
   },
   "repository": {
     "type": "git",
