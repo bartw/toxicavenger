@@ -5,5 +5,5 @@ const createWasteItem = () =>
 
 test("Given a waste item when calling Object.isFrozen then returns true", () => {
   const wasteItem = createWasteItem();
-  expect(Object.isFrozen(wasteItem)).toBeTruthy();
+  expect(Object.isFrozen(wasteItem)).toBeFalsy();//.toBeTruthy();
 });
