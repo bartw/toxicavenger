@@ -2,6 +2,9 @@ import React from "react";
 import WasteService from "../services/WasteService";
 import { Bar } from "react-chartjs-2";
 import _ from "lodash";
+import PropTypes from "prop-types";
+import Team from "../entities/Team";
+import Sprint from "../entities/Sprint";
 
 export default class WasteChart extends React.Component {
   constructor(props) {
@@ -103,3 +106,8 @@ export default class WasteChart extends React.Component {
     );
   }
 }
+
+WasteChart.propTypes = {
+  team: PropTypes.instanceOf(Team).isRequired,
+  sprint: PropTypes.instanceOf(Sprint).isRequired
+};

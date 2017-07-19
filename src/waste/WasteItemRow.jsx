@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
+import WasteItem from "../entities/WasteItem";
 
-export default function WasteItem({ waste, onDelete }) {
+export default function WasteItemRow({ waste, onDelete }) {
   return (
     <tr>
       <td>
@@ -21,3 +23,8 @@ export default function WasteItem({ waste, onDelete }) {
     </tr>
   );
 }
+
+WasteItem.propTypes = {
+  waste: PropTypes.instanceOf(WasteItem).isRequired,
+  onDelete: PropTypes.func.isRequired
+};

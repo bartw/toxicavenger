@@ -2,7 +2,7 @@ import React from "react";
 import WasteService from "../services/WasteService";
 import TablePage from "../app/TablePage";
 import AddWaste from "./AddWaste";
-import WasteItem from "./WasteItem";
+import WasteItemRow from "./WasteItemRow";
 
 export default class Waste extends React.Component {
   constructor(props) {
@@ -40,7 +40,7 @@ export default class Waste extends React.Component {
 
   render() {
     const wasteRows = this.state.waste.map(item =>
-      <WasteItem
+      <WasteItemRow
         key={item.id}
         waste={item}
         onDelete={() => {

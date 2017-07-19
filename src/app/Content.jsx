@@ -87,7 +87,7 @@ export default class Content extends React.Component {
             onGoBack={() =>
               this.setState({ activePage: SPRINTS, sprint: null })}
           >
-            <WasteChart team={this.state.team} sprint={this.state.sprint} user={this.props.user.uid} />
+            <WasteChart team={this.state.team} sprint={this.state.sprint} />
           </GoBackWrapper>}
       </div>
     );

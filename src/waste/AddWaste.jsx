@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default class AddSprint extends React.Component {
+export default class AddWaste extends React.Component {
   constructor(props) {
     super(props);
 
@@ -64,3 +65,7 @@ export default class AddSprint extends React.Component {
     );
   }
 }
+
+AddWaste.propTypes = {
+  onAdd: PropTypes.func.isRequired
+};
