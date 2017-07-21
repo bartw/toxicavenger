@@ -57,7 +57,7 @@ export default class AddWaste extends React.Component {
         />
         <button
           onClick={this.onAdd}
-          disabled={!this.state.description || !this.state.duration}
+          disabled={!this.state.type || !this.state.description || !this.state.duration}
         >
           Add
         </button>
