@@ -58,7 +58,21 @@ export default class WasteChart extends React.Component {
         datasets: [
           {
             label: "Waste",
-            data: totalsPerGroup
+            data: totalsPerGroup,
+            backgroundColor: [
+              "#0074D9",
+              "#7FDBFF",
+              "#39CCCC",
+              "#3D9970",
+              "#2ECC40",
+              "#01FF70",
+              "#FFDC00",
+              "#FF851B",
+              "#FF4136",
+              "#85144b",
+              "#F012BE",
+              "#B10DC9"
+            ]
           }
         ]
       },
