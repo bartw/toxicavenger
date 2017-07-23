@@ -6,11 +6,13 @@ import TeamComponent from "./TeamComponent";
 export default class Team extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { members: [] };
+    this.state = { members: [], requests: [] };
   }
 
   componentWillMount() {
-    this.requestService = new RequestService(this.props.team.id);
+    this.requestService = new RequestService(this.props.team.id, requests => {
+      this.setState({ requests: requests });
+    });
     this.memberService = new MemberService(this.props.team.id, members => {
       this.setState({ members: members });
     });
@@ -43,7 +45,9 @@ export default class Team extends React.Component {
 
   render() {
     const isOwner = this.props.team.isOwner(this.props.user);
-    const isMember = this.state.members.find(member => member.uid === this.props.user);
+    const isMember = this.state.members.find(
+      member => member.uid === this.props.user
+    );
     const actions = {
       onShowSprints: this.onShowSprints,
       onShowRequests: this.onShowRequests,
@@ -56,6 +60,8 @@ export default class Team extends React.Component {
         name={this.props.team.name}
         isOwner={isOwner}
         isMember={isMember}
+        pending={this.state.requests.length}
+        isPending={this.state.requests.filter(request => request.userId === this.props.user).length > 0}
         actions={actions}
       />
     );

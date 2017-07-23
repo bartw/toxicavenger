@@ -14,7 +14,7 @@
     },
     "requests": {
       "$teamid": {
-        ".read": "root.child('teams').child(auth.uid).child($teamid).exists()",
+        ".read": "auth != null",
         ".write": "auth != null"
       }
     },

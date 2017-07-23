@@ -27,6 +27,10 @@ h3 {
   margin: 10px 0;
 }
 
+span.action {
+  margin-right: 5px;
+}
+
 a {
   text-decoration: underline;
   margin-right: 5px;
