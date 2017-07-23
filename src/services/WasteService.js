@@ -5,9 +5,11 @@ export default class WasteService {
   constructor(team, sprint, onChanged) {
     const ref = firebase.database().ref("waste/" + team + "/" + sprint);
     let waste = [];
+    let addedCallback;
+    let removedCallback;
 
     if (onChanged) {
-      ref.on("child_added", data => {
+      addedCallback = ref.on("child_added", data => {
         const newWaste = new WasteItem(
           data.key,
           data.val().userId,
@@ -20,7 +22,7 @@ export default class WasteService {
         onChanged(waste);
       });
 
-      ref.on("child_removed", data => {
+      removedCallback = ref.on("child_removed", data => {
         waste = waste.filter(item => item.id !== data.key);
         onChanged(waste);
       });
@@ -42,7 +44,8 @@ export default class WasteService {
 
     this.dispose = () => {
       if (onChanged) {
-        ref.off();
+        ref.off("child_added", addedCallback);
+        ref.off("child_removed", removedCallback);
       }
     };
   }

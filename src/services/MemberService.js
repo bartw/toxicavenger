@@ -5,9 +5,10 @@ export default class MemberService {
   constructor(team, onChanged) {
     const ref = firebase.database().ref("members/" + team);
     let members = [];
+    let valueCallback;
 
     if (onChanged) {
-      ref.on("value", snapshot => {
+      valueCallback = ref.on("value", snapshot => {
         const data = snapshot.val();
         const members = Member.parseMembers(data);
         onChanged(members);
@@ -24,7 +25,7 @@ export default class MemberService {
 
     this.dispose = () => {
       if (onChanged) {
-        ref.off();
+        ref.off("value", valueCallback);
       }
     };
   }

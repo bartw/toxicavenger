@@ -4,8 +4,8 @@ import Team from "../entities/Team";
 export default class TeamService {
   constructor(onChanged) {
     const ref = firebase.database().ref("teams");
-    
-    ref.on("value", snapshot => {
+
+    const valueCallback = ref.on("value", snapshot => {
       const data = snapshot.val();
       const teams = Team.parseTeams(data);
       onChanged(teams);
@@ -20,7 +20,7 @@ export default class TeamService {
     };
 
     this.dispose = () => {
-      ref.off();
+      ref.off("value", valueCallback);
     };
   }
 }

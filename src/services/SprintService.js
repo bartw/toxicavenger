@@ -5,15 +5,17 @@ export default class SprintService {
   constructor(team, onChanged) {
     const ref = firebase.database().ref("sprints/" + team);
     let sprints = [];
+    let addedCallback;
+    let removedCallback;
 
     if (onChanged) {
-      ref.on("child_added", data => {
+      addedCallback = ref.on("child_added", data => {
         const newSprint = new Sprint(data.key, data.val().name);
         sprints = [newSprint, ...sprints];
         onChanged(sprints);
       });
 
-      ref.on("child_removed", data => {
+      removedCallback = ref.on("child_removed", data => {
         sprints = sprints.filter(sprint => sprint.id !== data.key);
         onChanged(sprints);
       });
@@ -29,7 +31,8 @@ export default class SprintService {
 
     this.dispose = () => {
       if (onChanged) {
-        ref.off();
+        ref.off("child_added", addedCallback);
+        ref.off("child_removed", removedCallback);
       }
     };
   }
