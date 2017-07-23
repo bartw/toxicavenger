@@ -1,6 +1,13 @@
 import React from "react";
+import YesNoPopup from "../app/YesNoPopup";
 
-export default function Sprint({ name, isOwner, onShowWaste, onShowVisualization, onDelete }) {
+export default function Sprint({
+  name,
+  isOwner,
+  onShowWaste,
+  onShowVisualization,
+  onDelete
+}) {
   return (
     <tr>
       <td>
@@ -9,7 +16,12 @@ export default function Sprint({ name, isOwner, onShowWaste, onShowVisualization
       <td>
         <a onClick={onShowWaste}>waste</a>
         <a onClick={onShowVisualization}>visualize</a>
-        {isOwner && <a onClick={onDelete}>delete</a>}
+        {isOwner &&
+          <YesNoPopup
+            linkText="delete"
+            text={"Do you want to delete sprint " + name + "?"}
+            action={onDelete}
+          />}
       </td>
     </tr>
   );

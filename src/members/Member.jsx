@@ -1,4 +1,5 @@
 import React from "react";
+import YesNoPopup from "../app/YesNoPopup";
 
 export default function Member({ name, onDelete }) {
   return (
@@ -7,7 +8,11 @@ export default function Member({ name, onDelete }) {
         {name}
       </td>
       <td>
-        <a onClick={onDelete}>delete</a>
+        <YesNoPopup
+          linkText="delete"
+          text={"Do you want to delete " + name + " from this team?"}
+          action={onDelete}
+        />
       </td>
     </tr>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import YesNoPopup from "../app/YesNoPopup";
 import WasteItem from "../entities/WasteItem";
 
 export default function WasteItemRow({ waste, onDelete }) {
@@ -18,7 +19,11 @@ export default function WasteItemRow({ waste, onDelete }) {
         {waste.duration.toFixed(1)}
       </td>
       <td>
-        <a onClick={onDelete}>delete</a>
+        <YesNoPopup
+          linkText="delete"
+          text={"Do you want to delete waste item " + waste.description + "?"}
+          action={onDelete}
+        />
       </td>
     </tr>
   );

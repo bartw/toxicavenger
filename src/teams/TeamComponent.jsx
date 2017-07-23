@@ -7,7 +7,6 @@ export default function TeamComponent({
   isMember,
   pending,
   isPending,
-  showPopup,
   actions
 }) {
   return (
@@ -35,12 +34,11 @@ export default function TeamComponent({
             <a onClick={actions.onShowRequests}>requests</a>(<span className="focus">{pending}</span>)
           </span>}
         {isOwner && <a onClick={actions.onShowMembers}>members</a>}
-        {isOwner && <a onClick={actions.showPopup}>delete</a>}
-        {showPopup &&
+        {isOwner &&
           <YesNoPopup
+            linkText="delete"
             text={"Do you want to delete team " + name + "?"}
-            onYes={actions.onDelete}
-            onNo={actions.hidePopup}
+            action={actions.onDelete}
           />}
       </td>
     </tr>
