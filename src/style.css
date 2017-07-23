@@ -37,6 +37,10 @@ a {
   cursor: pointer;
 }
 
+span.action a {
+  margin-right: 0;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -113,4 +117,53 @@ header h1 {
 
 body {
   background-color: #fbfbfb;
+}
+
+.focus {
+  color: red;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.popup {
+  max-width: 500px;
+  margin: 70px auto;
+  padding: 10px 0;
+  background-color: white;
+  position: relative;
+}
+
+.popup h4 {
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 10px;
+  padding: 0 10px 10px 10px;
+  border-bottom: 1px solid darkgray;
+}
+
+.popup .header a.close {
+  float: right;
+  padding: 0 10px;
+  text-decoration: none;
+}
+
+.popup p {
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+
+.popup .actions {
+  text-align: right;
+  padding: 0 10px;
+}
+
+.popup .actions a {
+  margin-left: 10px;
 }

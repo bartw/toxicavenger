@@ -6,7 +6,7 @@ import TeamComponent from "./TeamComponent";
 export default class Team extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { members: [], requests: [] };
+    this.state = { members: [], requests: [], showPopup: false };
   }
 
   componentWillMount() {
@@ -39,8 +39,18 @@ export default class Team extends React.Component {
     this.props.actions.onShowMembers(this.props.team);
   };
 
+  showPopup = () => {
+    console.log("show");
+    this.setState({ showPopup: true });
+  }
+
+  hidePopup = () => {
+    this.setState({ showPopup: false });
+  }
+
   onDelete = () => {
     this.props.actions.onDelete(this.props.team.id);
+    this.hidePopup();
   };
 
   render() {
@@ -53,7 +63,9 @@ export default class Team extends React.Component {
       onShowRequests: this.onShowRequests,
       onShowMembers: this.onShowMembers,
       onJoin: this.onJoin,
-      onDelete: this.onDelete
+      onDelete: this.onDelete,
+      showPopup: this.showPopup,
+      hidePopup: this.hidePopup
     };
     return (
       <TeamComponent
@@ -61,7 +73,12 @@ export default class Team extends React.Component {
         isOwner={isOwner}
         isMember={isMember}
         pending={this.state.requests.length}
-        isPending={this.state.requests.filter(request => request.userId === this.props.user).length > 0}
+        isPending={
+          this.state.requests.filter(
+            request => request.userId === this.props.user
+          ).length > 0
+        }
+        showPopup={this.state.showPopup}
         actions={actions}
       />
     );

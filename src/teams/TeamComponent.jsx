@@ -1,4 +1,5 @@
 import React from "react";
+import YesNoPopup from "../App/YesNoPopup";
 
 export default function TeamComponent({
   name,
@@ -6,6 +7,7 @@ export default function TeamComponent({
   isMember,
   pending,
   isPending,
+  showPopup,
   actions
 }) {
   return (
@@ -16,12 +18,30 @@ export default function TeamComponent({
       <td>
         {(isOwner || isMember) &&
           <a onClick={actions.onShowSprints}>sprints</a>}
-        {!isOwner && !isMember && !isPending && <a onClick={actions.onJoin}>join</a>}
-        {!isOwner && !isMember && isPending && <span className="action">pending</span>}
-        {isOwner && <a onClick={actions.onShowRequests}>requests</a>}
-        {isOwner && pending > 0 && <span className="action">({pending})</span>}
+        {!isOwner &&
+          !isMember &&
+          !isPending &&
+          <a onClick={actions.onJoin}>join</a>}
+        {!isOwner &&
+          !isMember &&
+          isPending &&
+          <span className="action">pending</span>}
+        {isOwner &&
+          !pending &&
+          <a onClick={actions.onShowRequests}>requests</a>}
+        {isOwner &&
+          pending > 0 &&
+          <span className="action">
+            <a onClick={actions.onShowRequests}>requests</a>(<span className="focus">{pending}</span>)
+          </span>}
         {isOwner && <a onClick={actions.onShowMembers}>members</a>}
-        {isOwner && <a onClick={actions.onDelete}>delete</a>}
+        {isOwner && <a onClick={actions.showPopup}>delete</a>}
+        {showPopup &&
+          <YesNoPopup
+            text={"Do you want to delete team " + name + "?"}
+            onYes={actions.onDelete}
+            onNo={actions.hidePopup}
+          />}
       </td>
     </tr>
   );
