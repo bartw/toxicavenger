@@ -2,6 +2,10 @@
 
 # Toxic Avenger
 
+## About
+
+Keep track of the unplanned work your team is performing during a sprint.
+
 ## License
 
 Toxic Avenger is licensed under the [MIT License](LICENSE).
