@@ -1,5 +1,5 @@
 import React from "react";
-import YesNoPopup from "../App/YesNoPopup";
+import YesNoPopup from "../app/YesNoPopup";
 
 export default function TeamComponent({
   name,
