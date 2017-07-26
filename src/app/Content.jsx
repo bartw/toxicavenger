@@ -70,7 +70,7 @@ export default class Content extends React.Component {
           >
             <Sprints
               user={this.props.user.uid}
-              team={this.state.team}
+              team={this.state.team.id}
               onShowWaste={this.onShowWaste}
               onShowVisualization={this.onShowVisualization}
             />
@@ -80,7 +80,11 @@ export default class Content extends React.Component {
             onGoBack={() =>
               this.setState({ activePage: SPRINTS, sprint: null })}
           >
-            <Waste team={this.state.team} sprint={this.state.sprint} user={this.props.user} />
+            <Waste
+              team={this.state.team}
+              sprint={this.state.sprint}
+              user={this.props.user}
+            />
           </GoBackWrapper>}
         {this.state.activePage === VISUALIZATION &&
           <GoBackWrapper
