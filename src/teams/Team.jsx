@@ -57,6 +57,7 @@ export default class Team extends React.Component {
     };
     return (
       <TeamComponent
+        id = {this.props.team.id}
         name={this.props.team.name}
         isOwner={isOwner}
         isMember={isMember}

@@ -1,34 +1,17 @@
 import React from "react";
 import Header from "./Header";
-import Public from "./Public";
+import Home from "./Home";
 import Content from "./Content";
+import Teams from "../teams/Teams";
+import Sprints from "../sprints/Sprints";
 import Footer from "./Footer";
 import AuthenticationService from "../services/AuthenticationService";
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Redirect
-} from "react-router-dom";
-
-const Home = () =>
-  <div>
-    <h1>Toxic Avenger</h1>
-    <Link to="/teams">Teams</Link>
-  </div>;
+import { HashRouter as Router, Route, Redirect } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, user, ...rest }) =>
   <Route
     {...rest}
-    render={props =>
-      user
-        ? <Component {...props} user={user} />
-        : <Redirect
-            to={{
-              pathname: "/public",
-              state: { from: props.location }
-            }}
-          />}
+    render={props => (user ? <Component {...props} user={user} /> : <Home />)}
   />;
 
 export default class App extends React.Component {
@@ -39,8 +22,9 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.authenticationService = new AuthenticationService(user => {
-      this.setState({ loading: false, user: user });
+      this.setState({ user: user });
     });
+    this.setState({ loading: false });
   }
 
   render() {
@@ -56,15 +40,23 @@ export default class App extends React.Component {
                 logout={this.authenticationService.logout}
               />
               <div className="container">
-                <Route path="/" exact component={Home} />
+                <Route
+                  path="/"
+                  exact
+                  render={() => <Home isAuthenticated={!!this.state.user} />}
+                />
                 <PrivateRoute
                   exact
                   path="/teams"
-                  component={Content}
-                  isAuthenticated={this.state.user}
+                  component={Teams}
                   user={this.state.user}
                 />
-                <Route path="/public" component={Public} />
+                <PrivateRoute
+                  exact
+                  path="/teams/:team/sprints"
+                  component={Sprints}
+                  user={this.state.user}
+                />
               </div>
               <Footer />
             </div>
@@ -72,21 +64,4 @@ export default class App extends React.Component {
       </div>
     );
   }
-  /*
-  render() {
-    return (
-      <div>
-        <Header
-          user={this.state.user}
-          onAuthenticationStateChanged={this.onAuthenticationStateChanged}
-        />
-        <div className="container">
-          {!this.state.user && <Public />}
-          {this.state.user && <Content user={this.state.user} />}
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-  */
 }

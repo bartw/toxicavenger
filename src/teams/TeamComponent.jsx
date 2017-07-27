@@ -1,7 +1,9 @@
 import React from "react";
 import YesNoPopup from "../app/YesNoPopup";
+import { Link } from "react-router-dom";
 
 export default function TeamComponent({
+  id,
   name,
   isOwner,
   isMember,
@@ -16,7 +18,7 @@ export default function TeamComponent({
       </td>
       <td>
         {(isOwner || isMember) &&
-          <a onClick={actions.onShowSprints}>sprints</a>}
+          <Link to={"/teams/" + id + "/sprints"}>sprints</Link>}
         {!isOwner &&
           !isMember &&
           !isPending &&

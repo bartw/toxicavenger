@@ -32,6 +32,7 @@ span.action {
 }
 
 a {
+  color: black;
   text-decoration: underline;
   margin-right: 5px;
   cursor: pointer;

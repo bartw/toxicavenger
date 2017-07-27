@@ -12,10 +12,16 @@ export default class Sprints extends React.Component {
   }
 
   async componentDidMount() {
-    this.sprintService = new SprintService(this.props.team, sprints => {
-      this.setState({ sprints: sprints });
-    });
-    const team = await TeamService.getTeam(this.props.user, this.props.team);
+    this.sprintService = new SprintService(
+      this.props.match.params.team,
+      sprints => {
+        this.setState({ sprints: sprints });
+      }
+    );
+    const team = await TeamService.getTeam(
+      this.props.user.uid,
+      this.props.match.params.team
+    );
     this.setState({ team: team });
   }
 
@@ -35,7 +41,7 @@ export default class Sprints extends React.Component {
     if (!this.state.team || !this.state.sprints) {
       return null;
     }
-    const isOwner = this.state.team.isOwner(this.props.user);
+    const isOwner = this.state.team.isOwner(this.props.user.uid);
     const sprintRows = this.state.sprints.map(sprint =>
       <Sprint
         key={sprint.id}
