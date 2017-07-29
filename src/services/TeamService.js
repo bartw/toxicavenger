@@ -1,9 +1,9 @@
-import * as firebase from "firebase";
+import {database} from "firebase";
 import Team from "../entities/Team";
 
 export default class TeamService {
   constructor(onChanged) {
-    const ref = firebase.database().ref("teams");
+    const ref = database().ref("teams");
 
     const valueCallback = ref.on("value", snapshot => {
       const data = snapshot.val();
@@ -25,8 +25,7 @@ export default class TeamService {
   }
 
   static getTeam(owner, id) {
-    return firebase
-      .database()
+    return database()
       .ref("teams/" + owner + "/" + id)
       .once("value")
       .then(snapshot => new Team(id, owner, snapshot.val().name));

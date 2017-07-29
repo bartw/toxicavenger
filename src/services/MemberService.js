@@ -1,9 +1,9 @@
-import * as firebase from "firebase";
+import {database} from "firebase";
 import Member from "../entities/Member";
 
 export default class MemberService {
   constructor(team, onChanged) {
-    const ref = firebase.database().ref("members/" + team);
+    const ref = database().ref("members/" + team);
     let members = [];
     let valueCallback;
 

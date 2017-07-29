@@ -1,9 +1,9 @@
-import * as firebase from "firebase";
+import {database} from "firebase";
 import Sprint from "../entities/Sprint";
 
 export default class SprintService {
   constructor(team, onChanged) {
-    const ref = firebase.database().ref("sprints/" + team);
+    const ref = database().ref("sprints/" + team);
     let sprints = [];
     let addedCallback;
     let removedCallback;
@@ -38,8 +38,7 @@ export default class SprintService {
   }
 
   static getSprint(team, id) {
-    return firebase
-      .database()
+    return database()
       .ref("sprints/" + team + "/" + id)
       .once("value")
       .then(snapshot => new Sprint(id, snapshot.val().name));

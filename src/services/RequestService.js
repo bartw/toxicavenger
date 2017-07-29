@@ -1,9 +1,9 @@
-import * as firebase from "firebase";
+import {database} from "firebase";
 import Request from "../entities/Request";
 
 export default class RequestService {
   constructor(team, onChanged) {
-    const ref = firebase.database().ref("requests/" + team);
+    const ref = database().ref("requests/" + team);
     let requests = [];
     let addedCallback;
     let removedCallback;

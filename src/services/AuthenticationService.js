@@ -1,14 +1,14 @@
-import * as firebase from "firebase";
+import {auth} from "firebase";
 
 export default class AuthenticationService {
   constructor(onAuthStateChanged) {
-    this.auth = firebase.auth();
+    this.auth = auth();
     onAuthStateChanged(this.getCurrentUser());
     this.auth.onAuthStateChanged(onAuthStateChanged);
   }
 
   login = () => {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.auth.signInWithPopup(new auth.GoogleAuthProvider());
   };
 
   logout = () => {

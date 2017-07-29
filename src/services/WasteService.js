@@ -1,9 +1,9 @@
-import * as firebase from "firebase";
+import {database} from "firebase";
 import WasteItem from "../entities/WasteItem";
 
 export default class WasteService {
   constructor(team, sprint, onChanged) {
-    const ref = firebase.database().ref("waste/" + team + "/" + sprint);
+    const ref = database().ref("waste/" + team + "/" + sprint);
     let waste = [];
     let addedCallback;
     let removedCallback;
