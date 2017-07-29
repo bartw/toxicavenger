@@ -11,12 +11,7 @@ import WasteChart from "../visualization/WasteChart";
 import Footer from "./Footer";
 import AuthenticationService from "../services/AuthenticationService";
 import { HashRouter as Router, Route, Redirect } from "react-router-dom";
-
-const PrivateRoute = ({ component: Component, user, ...rest }) =>
-  <Route
-    {...rest}
-    render={props => (user ? <Component {...props} user={user} /> : <Home />)}
-  />;
+import PrivateRoute from "../navigation/PrivateRoute";
 
 export default class App extends React.Component {
   constructor(props) {
