@@ -5,6 +5,7 @@ import WasteService from "../services/WasteService";
 import TablePage from "../app/TablePage";
 import AddWaste from "./AddWaste";
 import WasteItemRow from "./WasteItemRow";
+import TotalWasteRow from "./TotalWasteRow";
 
 export default class Waste extends React.Component {
   constructor(props) {
@@ -65,22 +66,7 @@ export default class Waste extends React.Component {
         }}
       />
     );
-    const total = this.state.waste.length
-      ? this.state.waste
-          .reduce((sum, item) => sum + item.duration, 0)
-          .toFixed(1)
-      : 0;
-    wasteRows.push(
-      <tr key="total">
-        <td />
-        <td />
-        <td />
-        <td className="bold right-text">
-          {total}
-        </td>
-        <td />
-      </tr>
-    );
+    wasteRows.push(<TotalWasteRow key="total" waste={this.state.waste} />);
     return (
       <TablePage
         title={`Waste of ${this.state.sprint.name} of ${this.state.team.name}`}
