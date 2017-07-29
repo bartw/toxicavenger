@@ -37,11 +37,11 @@ export default class SprintService {
     };
   }
 
-  static async getSprint(team, id) {
-    const snapshot = await firebase
+  static getSprint(team, id) {
+    return firebase
       .database()
       .ref("sprints/" + team + "/" + id)
-      .once("value");
-    return new Sprint(id, snapshot.val().name);
+      .once("value")
+      .then(snapshot => new Sprint(id, snapshot.val().name));
   }
 }

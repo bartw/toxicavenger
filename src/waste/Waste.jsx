@@ -12,7 +12,7 @@ export default class Waste extends React.Component {
     this.state = { waste: [] };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.wasteService = new WasteService(
       this.props.match.params.team,
       this.props.match.params.sprint,
@@ -20,16 +20,18 @@ export default class Waste extends React.Component {
         this.setState({ waste: waste });
       }
     );
-    const team = await TeamService.getTeam(
+    TeamService.getTeam(
       this.props.user.uid,
       this.props.match.params.team
-    );
-    this.setState({ team: team });
-    const sprint = await SprintService.getSprint(
+    ).then(team => {
+      this.setState({ team: team });
+    });
+    SprintService.getSprint(
       this.props.match.params.team,
       this.props.match.params.sprint
-    );
-    this.setState({ sprint: sprint });
+    ).then(sprint => {
+      this.setState({ sprint: sprint });
+    });
   }
 
   componentWillUnmount() {

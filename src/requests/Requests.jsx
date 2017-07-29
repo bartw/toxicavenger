@@ -10,18 +10,19 @@ export default class Requests extends React.Component {
     this.state = { requests: [] };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.requestService = new RequestService(
       this.props.match.params.team,
       requests => {
         this.setState({ requests: requests });
       }
     );
-    const team = await TeamService.getTeam(
+    TeamService.getTeam(
       this.props.user.uid,
       this.props.match.params.team
-    );
-    this.setState({ team: team });
+    ).then(team => {
+      this.setState({ team: team });
+    });
   }
 
   componentWillUnmount() {

@@ -10,18 +10,19 @@ export default class Members extends React.Component {
     this.state = { members: [] };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.memberService = new MemberService(
       this.props.match.params.team,
       members => {
         this.setState({ members: members });
       }
     );
-    const team = await TeamService.getTeam(
+    TeamService.getTeam(
       this.props.user.uid,
       this.props.match.params.team
-    );
-    this.setState({ team: team });
+    ).then(team => {
+      this.setState({ team: team });
+    });
   }
 
   componentWillUnmount() {

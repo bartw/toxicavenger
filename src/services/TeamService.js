@@ -24,11 +24,11 @@ export default class TeamService {
     };
   }
 
-  static async getTeam(owner, id) {
-    const snapshot = await firebase
+  static getTeam(owner, id) {
+    return firebase
       .database()
       .ref("teams/" + owner + "/" + id)
-      .once("value");
-    return new Team(id, owner, snapshot.val().name);
+      .once("value")
+      .then(snapshot => new Team(id, owner, snapshot.val().name));
   }
 }

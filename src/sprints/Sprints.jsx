@@ -11,18 +11,19 @@ export default class Sprints extends React.Component {
     this.state = { sprints: [] };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.sprintService = new SprintService(
       this.props.match.params.team,
       sprints => {
         this.setState({ sprints: sprints });
       }
     );
-    const team = await TeamService.getTeam(
+    TeamService.getTeam(
       this.props.user.uid,
       this.props.match.params.team
-    );
-    this.setState({ team: team });
+    ).then(team => {
+      this.setState({ team: team });
+    });
   }
 
   componentWillUnmount() {
