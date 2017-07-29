@@ -173,3 +173,21 @@ body {
 .popup .actions a {
   margin-left: 10px;
 }
+
+.breadcrumbs {
+  font-size: 0.75em;
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  margin: 0;
+}
+
+.breadcrumbs a.active {
+  font-weight: bold;
+
+}
+
+.breadcrumbSeparator {
+ margin: 0 5px;
+}
