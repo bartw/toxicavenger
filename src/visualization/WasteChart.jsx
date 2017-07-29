@@ -17,7 +17,7 @@ export default class WasteChart extends React.Component {
       { key: "type", value: "type", label: "type" }
     ];
 
-    this.state = { waste: [], chartProperty: this.chartProperties[1] };
+    this.state = { waste: [], chartProperty: this.chartProperties[0] };
   }
 
   async componentDidMount() {
