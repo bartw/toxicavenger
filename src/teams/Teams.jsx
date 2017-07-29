@@ -33,19 +33,13 @@ export default class Teams extends React.Component {
   };
 
   render() {
-    const actions = {
-      onShowSprints: this.props.onShowSprints,
-      onShowRequests: this.props.onShowRequests,
-      onShowMembers: this.props.onShowMembers,
-      onJoin: this.onJoin,
-      onDelete: this.onDelete
-    };
     const teamRows = this.state.teams.map(team =>
       <Team
         key={team.id}
         user={this.props.user.uid}
         team={team}
-        actions={actions}
+        onJoin={this.onJoin}
+        onDelete={this.onDelete}
       />
     );
     return (

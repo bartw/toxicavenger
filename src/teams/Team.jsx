@@ -24,23 +24,11 @@ export default class Team extends React.Component {
   }
 
   onJoin = () => {
-    this.props.actions.onJoin(this.requestService.add);
-  };
-
-  onShowSprints = () => {
-    this.props.actions.onShowSprints(this.props.team);
-  };
-
-  onShowRequests = () => {
-    this.props.actions.onShowRequests(this.props.team);
-  };
-
-  onShowMembers = () => {
-    this.props.actions.onShowMembers(this.props.team);
+    this.props.onJoin(this.requestService.add);
   };
 
   onDelete = () => {
-    this.props.actions.onDelete(this.props.team.id);
+    this.props.onDelete(this.props.team.id);
   };
 
   render() {
@@ -48,16 +36,9 @@ export default class Team extends React.Component {
     const isMember = this.state.members.find(
       member => member.uid === this.props.user
     );
-    const actions = {
-      onShowSprints: this.onShowSprints,
-      onShowRequests: this.onShowRequests,
-      onShowMembers: this.onShowMembers,
-      onJoin: this.onJoin,
-      onDelete: this.onDelete
-    };
     return (
       <TeamComponent
-        id = {this.props.team.id}
+        teamPath={"/teams/" + this.props.team.id}
         name={this.props.team.name}
         isOwner={isOwner}
         isMember={isMember}
@@ -67,7 +48,8 @@ export default class Team extends React.Component {
             request => request.userId === this.props.user
           ).length > 0
         }
-        actions={actions}
+        onJoin={this.onJoin}
+        onDelete={this.onDelete}
       />
     );
   }

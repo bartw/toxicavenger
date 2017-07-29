@@ -3,13 +3,14 @@ import YesNoPopup from "../app/YesNoPopup";
 import { Link } from "react-router-dom";
 
 export default function TeamComponent({
-  id,
+  teamPath,
   name,
   isOwner,
   isMember,
   pending,
   isPending,
-  actions
+  onJoin,
+  onDelete
 }) {
   return (
     <tr>
@@ -18,29 +19,26 @@ export default function TeamComponent({
       </td>
       <td>
         {(isOwner || isMember) &&
-          <Link to={"/teams/" + id + "/sprints"}>sprints</Link>}
-        {!isOwner &&
-          !isMember &&
-          !isPending &&
-          <a onClick={actions.onJoin}>join</a>}
+          <Link to={teamPath + "/sprints"}>sprints</Link>}
+        {!isOwner && !isMember && !isPending && <a onClick={onJoin}>join</a>}
         {!isOwner &&
           !isMember &&
           isPending &&
           <span className="action">pending</span>}
         {isOwner &&
           !pending &&
-          <Link to={"/teams/" + id + "/requests"}>requests</Link>}
+          <Link to={teamPath + "/requests"}>requests</Link>}
         {isOwner &&
           pending > 0 &&
           <span className="action">
-            <a onClick={actions.onShowRequests}>requests</a>(<span className="focus">{pending}</span>)
+            <Link to={teamPath + "/requests"}>requests</Link>(<span className="focus">{pending}</span>)
           </span>}
-        {isOwner && <Link to={"/teams/" + id + "/members"}>members</Link>}
+        {isOwner && <Link to={teamPath + "/members"}>members</Link>}
         {isOwner &&
           <YesNoPopup
             linkText="delete"
             text={"Do you want to delete team " + name + "?"}
-            action={actions.onDelete}
+            action={onDelete}
           />}
       </td>
     </tr>
