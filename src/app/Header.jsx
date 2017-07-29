@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Authentication from "../authentication/Authentication";
 
 export default function Header({user, login, logout}) {
@@ -10,7 +11,7 @@ export default function Header({user, login, logout}) {
           login={login}
           logout={logout}
         />
-        <h1>Toxic Avenger</h1>
+        <Link className="title" to="/"><h1>Toxic Avenger</h1></Link>
       </div>
     </header>
   );

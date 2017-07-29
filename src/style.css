@@ -104,6 +104,11 @@ header {
   border-bottom: 1px solid darkgray;
 }
 
+header a.title {
+  margin: 0;
+  text-decoration: none;
+}
+
 header h1 {
   margin: 0;
 }
