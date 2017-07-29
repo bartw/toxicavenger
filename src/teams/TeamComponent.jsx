@@ -29,13 +29,13 @@ export default function TeamComponent({
           <span className="action">pending</span>}
         {isOwner &&
           !pending &&
-          <a onClick={actions.onShowRequests}>requests</a>}
+          <Link to={"/teams/" + id + "/requests"}>requests</Link>}
         {isOwner &&
           pending > 0 &&
           <span className="action">
             <a onClick={actions.onShowRequests}>requests</a>(<span className="focus">{pending}</span>)
           </span>}
-        {isOwner && <a onClick={actions.onShowMembers}>members</a>}
+        {isOwner && <Link to={"/teams/" + id + "/members"}>members</Link>}
         {isOwner &&
           <YesNoPopup
             linkText="delete"

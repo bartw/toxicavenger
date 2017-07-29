@@ -1,4 +1,5 @@
 import React from "react";
+import TeamService from "../services/TeamService";
 import MemberService from "../services/MemberService";
 import TablePage from "../app/TablePage";
 import Member from "./Member";
@@ -9,10 +10,18 @@ export default class Members extends React.Component {
     this.state = { members: [] };
   }
 
-  componentWillMount() {
-    this.memberService = new MemberService(this.props.team.id, members => {
-      this.setState({ members: members });
-    });
+  async componentDidMount() {
+    this.memberService = new MemberService(
+      this.props.match.params.team,
+      members => {
+        this.setState({ members: members });
+      }
+    );
+    const team = await TeamService.getTeam(
+      this.props.user.uid,
+      this.props.match.params.team
+    );
+    this.setState({ team: team });
   }
 
   componentWillUnmount() {
@@ -24,6 +33,9 @@ export default class Members extends React.Component {
   };
 
   render() {
+    if (!this.state.team) {
+      return null;
+    }
     const memberRows = this.state.members.map(member =>
       <Member
         key={member.uid}
@@ -35,7 +47,7 @@ export default class Members extends React.Component {
     );
     return (
       <TablePage
-        title={`Members of ${this.props.team.name}`}
+        title={`Members of ${this.state.team.name}`}
         headers={["name", "actions"]}
         rows={memberRows}
       />

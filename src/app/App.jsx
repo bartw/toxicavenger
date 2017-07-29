@@ -2,8 +2,12 @@ import React from "react";
 import Header from "./Header";
 import Home from "./Home";
 import Content from "./Content";
-import Teams from "../teams/Teams";
 import Sprints from "../sprints/Sprints";
+import Teams from "../teams/Teams";
+import Requests from "../requests/Requests";
+import Members from "../members/Members";
+import Waste from "../waste/Waste";
+import WasteChart from "../visualization/WasteChart";
 import Footer from "./Footer";
 import AuthenticationService from "../services/AuthenticationService";
 import { HashRouter as Router, Route, Redirect } from "react-router-dom";
@@ -55,6 +59,30 @@ export default class App extends React.Component {
                   exact
                   path="/teams/:team/sprints"
                   component={Sprints}
+                  user={this.state.user}
+                />
+                <PrivateRoute
+                  exact
+                  path="/teams/:team/requests"
+                  component={Requests}
+                  user={this.state.user}
+                />
+                <PrivateRoute
+                  exact
+                  path="/teams/:team/members"
+                  component={Members}
+                  user={this.state.user}
+                />
+                <PrivateRoute
+                  exact
+                  path="/teams/:team/sprints/:sprint/waste"
+                  component={Waste}
+                  user={this.state.user}
+                />
+                <PrivateRoute
+                  exact
+                  path="/teams/:team/sprints/:sprint/visualize"
+                  component={WasteChart}
                   user={this.state.user}
                 />
               </div>

@@ -1,4 +1,6 @@
 import React from "react";
+import TeamService from "../services/TeamService";
+import SprintService from "../services/SprintService";
 import WasteService from "../services/WasteService";
 import TablePage from "../app/TablePage";
 import AddWaste from "./AddWaste";
@@ -10,14 +12,24 @@ export default class Waste extends React.Component {
     this.state = { waste: [] };
   }
 
-  componentWillMount() {
+  async componentDidMount() {
     this.wasteService = new WasteService(
-      this.props.team.id,
-      this.props.sprint.id,
+      this.props.match.params.team,
+      this.props.match.params.sprint,
       waste => {
         this.setState({ waste: waste });
       }
     );
+    const team = await TeamService.getTeam(
+      this.props.user.uid,
+      this.props.match.params.team
+    );
+    this.setState({ team: team });
+    const sprint = await SprintService.getSprint(
+      this.props.match.params.team,
+      this.props.match.params.sprint
+    );
+    this.setState({ sprint: sprint });
   }
 
   componentWillUnmount() {
@@ -39,6 +51,9 @@ export default class Waste extends React.Component {
   };
 
   render() {
+    if (!this.state.team || !this.state.sprint) {
+      return null;
+    }
     const wasteRows = this.state.waste.map(item =>
       <WasteItemRow
         key={item.id}
@@ -66,7 +81,7 @@ export default class Waste extends React.Component {
     );
     return (
       <TablePage
-        title={`Waste of ${this.props.sprint.name} of ${this.props.team.name}`}
+        title={`Waste of ${this.state.sprint.name} of ${this.state.team.name}`}
         headers={["name", "type", "description", "duration", "actions"]}
         rows={wasteRows}
       >

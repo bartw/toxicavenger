@@ -36,4 +36,12 @@ export default class SprintService {
       }
     };
   }
+
+  static async getSprint(team, id) {
+    const snapshot = await firebase
+      .database()
+      .ref("sprints/" + team + "/" + id)
+      .once("value");
+    return new Sprint(id, snapshot.val().name);
+  }
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import TeamService from "../services/TeamService";
 import RequestService from "../services/RequestService";
 import TablePage from "../app/TablePage";
 import Request from "./Request";
@@ -9,10 +10,18 @@ export default class Requests extends React.Component {
     this.state = { requests: [] };
   }
 
-  componentWillMount() {
-    this.requestService = new RequestService(this.props.team.id, requests => {
-      this.setState({ requests: requests });
-    });
+  async componentDidMount() {
+    this.requestService = new RequestService(
+      this.props.match.params.team,
+      requests => {
+        this.setState({ requests: requests });
+      }
+    );
+    const team = await TeamService.getTeam(
+      this.props.user.uid,
+      this.props.match.params.team
+    );
+    this.setState({ team: team });
   }
 
   componentWillUnmount() {
@@ -24,10 +33,13 @@ export default class Requests extends React.Component {
   };
 
   render() {
+    if (!this.state.team) {
+      return null;
+    }
     const requestRows = this.state.requests.map(request =>
       <Request
         key={request.id}
-        team={this.props.team.id}
+        team={this.state.team.id}
         request={request}
         onDelete={() => {
           this.onDelete(request.id);
@@ -36,7 +48,7 @@ export default class Requests extends React.Component {
     );
     return (
       <TablePage
-        title={`Requests of ${this.props.team.name}`}
+        title={`Requests of ${this.state.team.name}`}
         headers={["name", "actions"]}
         rows={requestRows}
       />

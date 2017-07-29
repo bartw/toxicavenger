@@ -1,4 +1,6 @@
 import React from "react";
+import TeamService from "../services/TeamService";
+import SprintService from "../services/SprintService";
 import WasteService from "../services/WasteService";
 import { Bar } from "react-chartjs-2";
 import _ from "lodash";
@@ -18,14 +20,24 @@ export default class WasteChart extends React.Component {
     this.state = { waste: [], chartProperty: this.chartProperties[1] };
   }
 
-  componentWillMount() {
+  async componentDidMount() {
     this.wasteService = new WasteService(
-      this.props.team.id,
-      this.props.sprint.id,
+      this.props.match.params.team,
+      this.props.match.params.sprint,
       waste => {
         this.setState({ waste: waste });
       }
     );
+    const team = await TeamService.getTeam(
+      this.props.user.uid,
+      this.props.match.params.team
+    );
+    this.setState({ team: team });
+    const sprint = await SprintService.getSprint(
+      this.props.match.params.team,
+      this.props.match.params.sprint
+    );
+    this.setState({ sprint: sprint });
   }
 
   componentWillUnmount() {
@@ -91,6 +103,9 @@ export default class WasteChart extends React.Component {
   };
 
   render() {
+    if (!this.state.team || !this.state.sprint) {
+      return null;
+    }
     const chartPropertyRadioButtons = this.chartProperties.map(chartProperty =>
       <label key={chartProperty.key}>
         <input
@@ -108,7 +123,7 @@ export default class WasteChart extends React.Component {
     return (
       <div>
         <h3>
-          Visualization of {this.props.sprint.name} of {this.props.team.name}
+          Visualization of {this.state.sprint.name} of {this.state.team.name}
         </h3>
         <div>
           <fieldset>
@@ -121,7 +136,7 @@ export default class WasteChart extends React.Component {
   }
 }
 
-WasteChart.propTypes = {
-  team: PropTypes.instanceOf(Team).isRequired,
-  sprint: PropTypes.instanceOf(Sprint).isRequired
-};
+// WasteChart.propTypes = {
+//   team: PropTypes.instanceOf(Team).isRequired,
+//   sprint: PropTypes.instanceOf(Sprint).isRequired
+// };

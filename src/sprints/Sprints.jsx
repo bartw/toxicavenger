@@ -8,7 +8,7 @@ import AddSprint from "./AddSprint";
 export default class Sprints extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { sprints: [] };
   }
 
   async componentDidMount() {
@@ -38,7 +38,7 @@ export default class Sprints extends React.Component {
   };
 
   render() {
-    if (!this.state.team || !this.state.sprints) {
+    if (!this.state.team) {
       return null;
     }
     const isOwner = this.state.team.isOwner(this.props.user.uid);
@@ -56,6 +56,8 @@ export default class Sprints extends React.Component {
         onShowVisualization={() => {
           this.props.onShowVisualization(sprint);
         }}
+        sprint={sprint.id}
+        team={this.state.team.id}
       />
     );
     return (

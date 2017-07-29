@@ -1,12 +1,15 @@
 import React from "react";
 import YesNoPopup from "../app/YesNoPopup";
+import { Link } from "react-router-dom";
 
 export default function Sprint({
   name,
   isOwner,
   onShowWaste,
   onShowVisualization,
-  onDelete
+  onDelete,
+  team,
+  sprint
 }) {
   return (
     <tr>
@@ -14,8 +17,8 @@ export default function Sprint({
         {name}
       </td>
       <td>
-        <a onClick={onShowWaste}>waste</a>
-        <a onClick={onShowVisualization}>visualize</a>
+        <Link to={"/teams/" + team + "/sprints/" + sprint + "/waste"}>waste</Link>
+        <Link to={"/teams/" + team + "/sprints/" + sprint + "/visualize"}>visualize</Link>
         {isOwner &&
           <YesNoPopup
             linkText="delete"
