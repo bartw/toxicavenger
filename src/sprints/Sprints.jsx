@@ -50,14 +50,7 @@ export default class Sprints extends React.Component {
         onDelete={() => {
           this.onDelete(sprint.id);
         }}
-        onShowWaste={() => {
-          this.props.onShowWaste(sprint);
-        }}
-        onShowVisualization={() => {
-          this.props.onShowVisualization(sprint);
-        }}
-        sprint={sprint.id}
-        team={this.state.team.id}
+        sprintPath={"/teams/" + this.state.team.id + "/sprints/" + sprint.id}
       />
     );
     return (
