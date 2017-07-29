@@ -135,8 +135,3 @@ export default class WasteChart extends React.Component {
     );
   }
 }
-
-// WasteChart.propTypes = {
-//   team: PropTypes.instanceOf(Team).isRequired,
-//   sprint: PropTypes.instanceOf(Sprint).isRequired
-// };
