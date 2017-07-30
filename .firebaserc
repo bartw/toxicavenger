@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "toxicavenger-a5a9a"
+    "dev": "wastetracker-5daf7",
+    "prod": "toxicavenger-a5a9a"
   }
 }
