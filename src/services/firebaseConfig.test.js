@@ -1,3 +1,4 @@
+var FIREBASE_CONFIG;
 import config from "./firebaseConfig";
 
 test("Given a config then the correct parameters are present", () => {
