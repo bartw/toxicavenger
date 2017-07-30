@@ -1,3 +1,4 @@
+const FIREBASE_CONFIG = FIREBASE_CONFIG || null;
 const config = FIREBASE_CONFIG || {
   apiKey: "AIzaSyBFst0KH4hxxdiU7ADQd09NMW_7oPh9RTI",
   authDomain: "wastetracker-5daf7.firebaseapp.com",
