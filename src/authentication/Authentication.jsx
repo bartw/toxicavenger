@@ -1,20 +1,17 @@
 import React from "react";
-import AuthenticationComponent from "./AuthenticationComponent";
+import PropTypes from "prop-types";
 
-export default class Authentication extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const name = (this.props.user && this.props.user.displayName) || "guest";
-    return (
-      <AuthenticationComponent
-        isAuthenticated={!!this.props.user}
-        name={name}
-        login={this.props.login}
-        logout={this.props.logout}
-      />
-    );
-  }
+export default function Authentication({ user, login, logout }) {
+  return (
+    <div className="right">
+      {!user && <a onClick={login}>login</a>}
+      {user && <a onClick={logout}>logout</a>}
+    </div>
+  );
 }
+
+Authentication.propTypes = {
+  user: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
+};
