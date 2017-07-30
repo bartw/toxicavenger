@@ -1,6 +1,6 @@
 import React from "react";
 import AuthenticationService from "../services/AuthenticationService";
-import Content from "./Content";
+import MasterPage from "../page/MasterPage";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class App extends React.Component {
     return (
       <div>
         {!this.state.loading &&
-          <Content
+          <MasterPage
             user={this.state.user}
             login={this.authenticationService.login}
             logout={this.authenticationService.logout}

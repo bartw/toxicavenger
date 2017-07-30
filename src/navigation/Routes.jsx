@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
-import Home from "../app/Home";
+import Home from "../home/Home";
 import Sprints from "../sprints/Sprints";
 import Teams from "../teams/Teams";
 import Requests from "../requests/Requests";

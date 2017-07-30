@@ -4,7 +4,7 @@ import PrivateRoute from "../navigation/PrivateRoute";
 import Breadcrumbs from "../navigation/Breadcrumbs";
 import Routes from "../navigation/Routes";
 
-export default function Container({ user }) {
+export default function Page({ user }) {
   return (
     <div className="container">
       <Breadcrumbs isAuthenticated={!!user} />
