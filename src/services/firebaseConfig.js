@@ -1,10 +1,10 @@
-const config = {
-    apiKey: "AIzaSyDGL-so34ZsCcf_TOsRIfbzfmUy0QXzb9g",
-    authDomain: "toxicavenger-a5a9a.firebaseapp.com",
-    databaseURL: "https://toxicavenger-a5a9a.firebaseio.com",
-    projectId: "toxicavenger-a5a9a"
-  };
+const config = FIREBASE_CONFIG || {
+  apiKey: "AIzaSyBFst0KH4hxxdiU7ADQd09NMW_7oPh9RTI",
+  authDomain: "wastetracker-5daf7.firebaseapp.com",
+  databaseURL: "https://wastetracker-5daf7.firebaseio.com",
+  projectId: "wastetracker-5daf7"
+};
 
-  Object.freeze(config);
+Object.freeze(config);
 
-  export default config;
+export default config;
