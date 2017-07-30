@@ -4,7 +4,7 @@ import "reset-css/reset.css";
 import "./style.css";
 import {initializeApp} from "firebase";
 import firebaseConfig from "./firebaseConfig";
-import App from "./app/App";
+import App from "./components/app/App";
 
 initializeApp(firebaseConfig);
 

@@ -1,6 +1,6 @@
 import React from "react";
-import RequestService from "../services/RequestService";
-import MemberService from "../services/MemberService";
+import RequestService from "../../services/RequestService";
+import MemberService from "../../services/MemberService";
 import TeamComponent from "./TeamComponent";
 
 export default class Team extends React.Component {

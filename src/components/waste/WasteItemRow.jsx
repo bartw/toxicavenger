@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import YesNoPopup from "../app/YesNoPopup";
-import WasteItem from "../entities/WasteItem";
+import WasteItem from "../../entities/WasteItem";
 
 export default function WasteItemRow({ waste, onDelete }) {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import TeamService from "../services/TeamService";
+import TeamService from "../../services/TeamService";
 import TablePage from "../app/TablePage";
 import Team from "./Team";
 import AddTeam from "./AddTeam";

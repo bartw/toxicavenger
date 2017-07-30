@@ -1,5 +1,5 @@
 import React from "react";
-import MemberService from "../services/MemberService";
+import MemberService from "../../services/MemberService";
 import RequestComponent from "./RequestComponent";
 
 export default class Team extends React.Component {

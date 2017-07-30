@@ -1,5 +1,5 @@
 import React from "react";
-import AuthenticationService from "../services/AuthenticationService";
+import AuthenticationService from "../../services/AuthenticationService";
 import MasterPage from "../page/MasterPage";
 
 export default class App extends React.Component {

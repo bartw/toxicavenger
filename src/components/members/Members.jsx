@@ -1,6 +1,6 @@
 import React from "react";
-import TeamService from "../services/TeamService";
-import MemberService from "../services/MemberService";
+import TeamService from "../../services/TeamService";
+import MemberService from "../../services/MemberService";
 import TablePage from "../app/TablePage";
 import Member from "./Member";
 

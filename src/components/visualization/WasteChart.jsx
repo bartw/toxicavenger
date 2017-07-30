@@ -1,11 +1,11 @@
 import React from "react";
-import TeamService from "../services/TeamService";
-import SprintService from "../services/SprintService";
-import WasteService from "../services/WasteService";
-import ChartCalculationService from "../services/ChartCalculationService";
+import TeamService from "../../services/TeamService";
+import SprintService from "../../services/SprintService";
+import WasteService from "../../services/WasteService";
+import ChartCalculationService from "../../services/ChartCalculationService";
 import PropTypes from "prop-types";
-import Team from "../entities/Team";
-import Sprint from "../entities/Sprint";
+import Team from "../../entities/Team";
+import Sprint from "../../entities/Sprint";
 import ChartPropertyRadioButton from "./ChartPropertyRadioButton";
 import WasteChartComponent from "./WasteChartComponent";
 

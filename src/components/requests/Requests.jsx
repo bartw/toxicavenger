@@ -1,6 +1,6 @@
 import React from "react";
-import TeamService from "../services/TeamService";
-import RequestService from "../services/RequestService";
+import TeamService from "../../services/TeamService";
+import RequestService from "../../services/RequestService";
 import TablePage from "../app/TablePage";
 import Request from "./Request";
 
