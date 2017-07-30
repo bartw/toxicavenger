@@ -3,7 +3,6 @@ import {auth} from "firebase";
 export default class AuthenticationService {
   constructor(onAuthStateChanged) {
     this.auth = auth();
-    onAuthStateChanged(this.getCurrentUser());
     this.auth.onAuthStateChanged(onAuthStateChanged);
   }
 

@@ -10,15 +10,13 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this.authenticationService = new AuthenticationService(user => {
-      this.setState({ user: user });
+      this.setState({ user: user, loading: false });
     });
-    this.setState({ loading: false });
   }
 
   render() {
     return (
       <div>
-        {this.state.loading && <div>Loading</div>}
         {!this.state.loading &&
           <Content
             user={this.state.user}
