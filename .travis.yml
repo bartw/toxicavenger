@@ -16,11 +16,3 @@ deploy:
     message: "deployed to DEV"
     on:
       branch: "master"
-  - provider: firebase
-    project: prod
-    token:
-      secure: "JpLI2z2LgNEEkU81n4HMKFeyy4eFyZI7Bi2OLhKMpmWeN6GUtCaGy6RMyDEo8b0rUhv8JJVO/AFftsBG/LP7TYh4VDOdiuqjNEljhD9UrVdJ5RfufkFyT8yqvV9oYiu3r+bxZ8daz6afHzCP+7DS4yaiFPOTuztsvS9aADUEqS7HeJ8ymZ8LTHfWqfgQHCW8JWLauUeCCm6htsE73xsS0mxYAVsbMl8t9qDkl7roa9rx30BIA6ozudk2vDjdZ2Iw08sarAUQTE/SZGdIbnn/6fq2tdfYshriO3WG/QWXc9FLdx7PFUHvyKkgXyr5+0Ahpa+rTK+uw+7roTQabIPOwJXyhnN0xVtU+g8dRl3RAdH6FG40qfjHqwscJMpr9+EsTZRSFgGra9Prk/nkrPm2KLjtptSQA5OChfW6H1ROtCDlc1y64eVMTxVSPiVHm+7odXz2qwQ4iOiLb371f7H9qbECeGjAq0aun9pDqcMNRiw7mfQLRDZHBgKjtyw7iyxPdyNBEoERmipBCWyBvZXyIy7HvpmDb0qWlR0+zCN6T2CGfdLIMrNUPaVdKSnfATkRD5J96VdP42yLI3CwZT4CBDOrQmFxz3uX4szM+xoyOODS+pzmOqo4HoBzUzgAe9SDpRk3ABqfMq4NyW+vPtui/JFRjPErJBnizPB7z6qrPZA="
-    skip_cleanup: true
-    message: "deployed to PROD"
-    on:
-      tags: true
