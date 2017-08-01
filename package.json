@@ -7,7 +7,8 @@
     "start": "webpack-dev-server --progress -d --colors --content-base ./public",
     "build": "webpack -p --config webpack.production.config.js",
     "test": "jest",
-    "test:watch": "jest --watch --coverage --collectCoverageFrom=src/**/*.{js,jsx}"
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --collectCoverageFrom=src/**/*.{js,jsx}"
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,20 @@
   },
   "homepage": "https://github.com/bartw/toxicavenger#readme",
   "jest": {
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js",
+      "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$",
     "globals": {
       "FIREBASE_CONFIG": null
     }
   },
   "devDependencies": {
+    "@types/jest": "^20.0.5",
+    "@types/lodash": "^4.14.71",
+    "awesome-typescript-loader": "^3.2.2",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -37,6 +47,7 @@
     "react-test-renderer": "^15.6.1",
     "sinon": "^2.3.8",
     "style-loader": "^0.18.2",
+    "typescript": "^2.4.2",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.5.1"
   },

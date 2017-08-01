@@ -1,3 +1,4 @@
+import {} from "jest";
 import Team from "./Team";
 
 const createTeam = () => new Team("id", "owner", "name");

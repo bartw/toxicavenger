@@ -12,10 +12,11 @@ const firebaseConfig = process.env.TRAVIS_TAG
 module.exports = {
   entry: "./src/index.js",
   output: { filename: "bundle.js", path: path.resolve(__dirname, "public") },
-  resolve: { extensions: [".jsx", ".js"] },
+  resolve: { extensions: [".ts", ".tsx", ".jsx", ".js"] },
   module: {
     rules: [
       { test: /\.jsx?$/, exclude: /node_modules/, use: "babel-loader" },
+      { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
       { test: /\.css$/, use: ["style-loader", "css-loader"] }
     ]
   },
