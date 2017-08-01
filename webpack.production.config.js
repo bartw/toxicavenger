@@ -1,5 +1,13 @@
 const path = require("path");
 const webpack = require("webpack");
+const firebaseConfig = process.env.TRAVIS_TAG
+  ? {
+      apiKey: "AIzaSyDGL-so34ZsCcf_TOsRIfbzfmUy0QXzb9g",
+      authDomain: "toxicavenger-a5a9a.firebaseapp.com",
+      databaseURL: "https://toxicavenger-a5a9a.firebaseio.com",
+      projectId: "toxicavenger-a5a9a"
+    }
+  : null;
 
 module.exports = {
   entry: "./src/index.js",
@@ -13,12 +21,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      FIREBASE_CONFIG: JSON.stringify({
-        apiKey: "AIzaSyDGL-so34ZsCcf_TOsRIfbzfmUy0QXzb9g",
-        authDomain: "toxicavenger-a5a9a.firebaseapp.com",
-        databaseURL: "https://toxicavenger-a5a9a.firebaseio.com",
-        projectId: "toxicavenger-a5a9a"
-      })
+      FIREBASE_CONFIG: JSON.stringify(firebaseConfig)
     })
   ]
 };
