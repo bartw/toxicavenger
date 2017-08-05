@@ -21,7 +21,12 @@
   },
   "homepage": "https://github.com/bartw/toxicavenger#readme",
   "jest": {
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js",
       "^.+\\.(js|jsx)$": "babel-jest"

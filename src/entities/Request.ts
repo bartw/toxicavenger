@@ -3,7 +3,7 @@ export default class Request {
   public userId: string;
   public userName: string;
   
-  constructor(id, userId, userName) {
+  constructor(id: string, userId: string, userName: string) {
     this.id = id;
     this.userId = userId;
     this.userName = userName;

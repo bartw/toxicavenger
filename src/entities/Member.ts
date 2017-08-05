@@ -4,7 +4,7 @@ export default class Member {
   public uid: string;
   public name: string;
   
-  constructor(uid, name) {
+  constructor(uid: string, name: string) {
     this.uid = uid;
     this.name = name;
     Object.freeze(this);

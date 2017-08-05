@@ -6,7 +6,7 @@ export default class WasteItem {
   public description: string;
   public duration: number;
 
-  constructor(id, userId, userName, type, description, duration) {
+  constructor(id: string, userId: string, userName: string, type: string, description: string, duration: string) {
     this.id = id;
     this.userId = userId;
     this.userName = userName;
