@@ -16,7 +16,7 @@ export default class Team {
     return this.owner === user;
   }
 
-  public static parseTeams(data) {
+  public static parseTeams(data: any) {
     const owners = _(data).keys().value();
     const teams = _(owners)
       .map(owner => {

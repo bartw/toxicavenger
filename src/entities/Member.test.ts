@@ -7,10 +7,6 @@ test("Given a member when calling Object.isFrozen then returns true", () => {
   expect(Object.isFrozen(member)).toBeTruthy();
 });
 
-test("Given no data when ParseMembers then an empty list is returned", () => {
-  expect(Member.parseMembers()).toEqual([]);
-});
-
 test("Given an empty json when ParseMembers then an empty list is returned", () => {
   const data = {};
   expect(Member.parseMembers(data)).toEqual([]);
