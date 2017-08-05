@@ -1,7 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
+//import PropTypes from "prop-types";
 
-export default class AddWaste extends React.Component {
+export interface AddWasteProps {
+  onAdd: (type: string, description: string, duration: string) => any;
+}
+
+interface AddWasteState {
+  type: string;
+  description: string;
+  duration: string;
+}
+
+export class AddWaste extends React.Component<AddWasteProps, AddWasteState> {
+  private types: string[];
+
   constructor(props) {
     super(props);
 
@@ -57,7 +69,9 @@ export default class AddWaste extends React.Component {
         />
         <button
           onClick={this.onAdd}
-          disabled={!this.state.type || !this.state.description || !this.state.duration}
+          disabled={
+            !this.state.type || !this.state.description || !this.state.duration
+          }
         >
           Add
         </button>
@@ -66,6 +80,6 @@ export default class AddWaste extends React.Component {
   }
 }
 
-AddWaste.propTypes = {
-  onAdd: PropTypes.func.isRequired
-};
+// AddWaste.propTypes = {
+//   onAdd: PropTypes.func.isRequired
+// };

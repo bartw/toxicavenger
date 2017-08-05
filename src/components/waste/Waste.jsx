@@ -3,7 +3,7 @@ import TeamService from "../../services/TeamService";
 import SprintService from "../../services/SprintService";
 import WasteService from "../../services/WasteService";
 import TablePage from "../app/TablePage";
-import AddWaste from "./AddWaste";
+import { AddWaste } from "./AddWaste";
 import WasteItemRow from "./WasteItemRow";
 import TotalWasteRow from "./TotalWasteRow";
 
