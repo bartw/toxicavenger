@@ -1,6 +1,6 @@
 {
   "name": "toxicavenger",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Toxic Avenger is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).",
   "main": "src/index.js",
   "scripts": {
