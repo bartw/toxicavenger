@@ -1,20 +1,17 @@
 import * as firebase from "firebase/app";
 import WasteItem from "../entities/WasteItem";
+import { CancellableCallback } from "./CancellableCallback";
 
-type wasteCallback = (waste: WasteItem[]) => any;
-type cancellableCallback = (
-  a: firebase.database.DataSnapshot,
-  b?: string
-) => any;
+type WasteCallback = (waste: WasteItem[]) => void;
 
 export default class WasteService {
   private waste: WasteItem[];
   private ref: firebase.database.Reference;
-  private addedCallback: cancellableCallback;
-  private removedCallback: cancellableCallback;
-  private onChanged: wasteCallback;
+  private addedCallback: CancellableCallback;
+  private removedCallback: CancellableCallback;
+  private onChanged: WasteCallback;
 
-  public constructor(team: string, sprint: string, onChanged: wasteCallback) {
+  public constructor(team: string, sprint: string, onChanged: WasteCallback) {
     this.waste = [];
     this.onChanged = onChanged;
     this.ref = firebase.database().ref("waste/" + team + "/" + sprint);
@@ -25,7 +22,7 @@ export default class WasteService {
     }
   }
 
-  public add = (userId, userName, type, description, duration) => {
+  public add = (userId, userName, type, description, duration): void => {
     this.ref.push({
       userId,
       userName,
@@ -35,22 +32,22 @@ export default class WasteService {
     });
   };
 
-  public delete = id => {
+  public delete = (id): void => {
     this.ref.child(id).remove();
   };
 
-  public dispose = () => {
+  public dispose = (): void => {
     if (this.onChanged) {
       this.ref.off("child_added", this.addedCallback);
       this.ref.off("child_removed", this.removedCallback);
     }
   };
 
-  private attachAddedCallback = () => {
+  private attachAddedCallback = (): void => {
     this.addedCallback = this.ref.on("child_added", this.onAdded);
   };
 
-  private onAdded = (data: firebase.database.DataSnapshot) => {
+  private onAdded = (data: firebase.database.DataSnapshot): void => {
     const newWaste = new WasteItem(
       data.key,
       data.val().userId,
@@ -63,11 +60,11 @@ export default class WasteService {
     this.onChanged(this.waste);
   };
 
-  private attachRemovedCallback = () => {
+  private attachRemovedCallback = (): void => {
     this.removedCallback = this.ref.on("child_removed", this.onRemoved);
   };
 
-  private onRemoved = (data: firebase.database.DataSnapshot) => {
+  private onRemoved = (data: firebase.database.DataSnapshot): void => {
     this.waste = this.waste.filter(item => item.id !== data.key);
     this.onChanged(this.waste);
   };

@@ -12,11 +12,11 @@ export default class Team {
     Object.freeze(this);
   }
 
-  public isOwner(user: string) {
+  public isOwner(user: string): boolean {
     return this.owner === user;
   }
 
-  public static parseTeams(data: any) {
+  public static parseTeams(data: any): Team[] {
     const owners = _(data).keys().value();
     const teams = _(owners)
       .map(owner => {
@@ -27,8 +27,7 @@ export default class Team {
           })
           .value();
       })
-      .flatten()
       .value();
-    return teams;
+    return _.flatten(teams);
   }
 }
