@@ -11,7 +11,7 @@ export default function Authentication({ user, login, logout }) {
 }
 
 Authentication.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
   login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired
 };

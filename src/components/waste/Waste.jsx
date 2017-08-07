@@ -21,10 +21,7 @@ export default class Waste extends React.Component {
         this.setState({ waste: waste });
       }
     );
-    TeamService.getTeam(
-      this.props.user.uid,
-      this.props.match.params.team
-    ).then(team => {
+    TeamService.getTeam(this.props.match.params.team).then(team => {
       this.setState({ team: team });
     });
     SprintService.getSprint(

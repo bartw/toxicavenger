@@ -1,4 +1,4 @@
-import {database} from "firebase";
+import { database } from "firebase";
 import Team from "../entities/Team";
 
 export default class TeamService {
@@ -24,10 +24,11 @@ export default class TeamService {
     };
   }
 
-  static getTeam(owner, id) {
-    return database()
-      .ref("teams/" + owner + "/" + id)
-      .once("value")
-      .then(snapshot => new Team(id, owner, snapshot.val().name));
+  static getTeam(id) {
+    return database().ref("teams").once("value").then(snapshot => {
+      const data = snapshot.val();
+      const teams = Team.parseTeams(data);
+      return teams.find(team => team.id === id);
+    });
   }
 }

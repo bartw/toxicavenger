@@ -17,10 +17,7 @@ export default class Members extends React.Component {
         this.setState({ members: members });
       }
     );
-    TeamService.getTeam(
-      this.props.user.uid,
-      this.props.match.params.team
-    ).then(team => {
+    TeamService.getTeam(this.props.match.params.team).then(team => {
       this.setState({ team: team });
     });
   }
